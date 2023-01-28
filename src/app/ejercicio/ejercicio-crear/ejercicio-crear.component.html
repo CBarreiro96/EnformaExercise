@@ -1,0 +1,115 @@
+<app-encabezado></app-encabezado>
+<h3>
+  Ejercicio nuevo
+</h3>
+
+<form
+ [formGroup]="ejercicioForm"
+ (ngSubmit)="!ejercicioForm.invalid && crearEjercicio(ejercicioForm.value)"
+>
+  <!--Nombre-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="nombre">Nombre</label>
+    <input
+      novalidate
+      id="nombre"
+      class="form-control"
+      formControlName="nombre"
+      placeholder="Nombre del ejercicio"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        ejercicioForm.get('nombre')!.hasError('required') &&
+        ejercicioForm.get('nombre')!.touched
+      "
+    >
+      Nombre requerido
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="ejercicioForm.get('nombre')!.hasError('minlength')"
+    >
+      El nombre es muy corto, debe tener al menos dos caracteres.
+    </div>
+  </div>
+
+  <!--Descripción-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="descripcion">Descripción</label>
+    <input
+      novalidate
+      id="descripcion"
+      class="form-control"
+      formControlName="descripcion"
+      placeholder="Descripción del ejercicio"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        ejercicioForm.get('descripcion')!.hasError('required') &&
+        ejercicioForm.get('descripcion')!.touched
+      "
+    >
+      Descripción requerida
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="ejercicioForm.get('descripcion')!.hasError('maxlength')"
+    >
+      La descripción es demasiado larga, debe tener máximo 100 caracteres
+    </div>
+  </div>
+
+  <!--Url para video-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="video">Url para video</label>
+    <input
+      novalidate
+      id="video"
+      class="form-control"
+      formControlName="video"
+      placeholder="video del ejercicio"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        ejercicioForm.get('video')!.hasError('required') &&
+        ejercicioForm.get('video')!.touched
+      "
+    >
+      La dirección del video es requerida
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="ejercicioForm.get('video')!.hasError('minlength')"
+    >
+      El video es muy corto, debe tener al menos dos caracteres.
+    </div>
+  </div>
+
+  <!--Calorías-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="calorias">Calorías perdidas por repetición</label>
+    <input
+      novalidate
+      id="calorias"
+      class="form-control"
+      type="number"
+      formControlName="calorias"
+      placeholder="calorías"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        ejercicioForm.get('calorias')!.hasError('required') &&
+        ejercicioForm.get('calorias')!.touched
+      "
+    >
+      La cantidad de calorías perdidas por repetición es requerida
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!ejercicioForm.valid">Crear</button>
+  <button type="button" class="btn btn-danger ml-3" (click)="cancelarEjercicio()">Cancelar</button>
+</form>

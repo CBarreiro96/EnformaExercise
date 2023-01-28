@@ -1,0 +1,62 @@
+<app-encabezado></app-encabezado>
+<h3>
+  Editar persona
+</h3>
+
+<form
+ [formGroup]="personaForm" *ngIf="personaForm"
+ (ngSubmit)="!personaForm.invalid && terminarPersona(personaForm.value)"
+>
+      <!--Razón-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="razon">Razón por la que no sigue entrenando a la persona</label>
+        <input
+          novalidate
+          id="razon"
+          class="form-control"
+          formControlName="razon"
+          placeholder="Razón"
+        />
+          <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('razon')!.hasError('required') &&
+            personaForm.get('razon')!.touched
+          "
+        >
+          Contenido requerido
+        </div>
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="personaForm.get('razon')!.hasError('minlength')"
+        >
+          El contenido es muy corto, debe tener al menos dos caracteres.
+        </div>
+      </div>
+
+      <!--Fecha de ingreso-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="terminado">Fecha de terminación del entrenamiento</label>
+        <input
+          novalidate
+          type="date"
+          id="terminado"
+          class="form-control"
+          formControlName="terminado"
+          placeholder="Fecha terminado"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('terminado')!.hasError('required') &&
+            personaForm.get('terminado')!.touched
+          "
+        >
+          Por favor diligencie este campo
+        </div>
+      </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!personaForm.valid">Actualizar</button>
+  &nbsp;
+  <button type="button" class="btn btn-danger ml-3" (click)="cancelarPersona()">Cancelar</button>
+</form>

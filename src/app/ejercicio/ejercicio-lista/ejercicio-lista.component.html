@@ -1,0 +1,33 @@
+<app-encabezado></app-encabezado>
+<div class="row">
+  <div class="col col-12">
+    <div class="card" style="width: 100%;">
+      <div class="card-header">
+        Ejercicios <button type="button" class="btn btn-warning" (click)="ejercicioCrear()"><i class="bi bi-plus-circle"></i></button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Video</th>
+            <th>Calorias por repetición</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ejercicio of ejercicios">
+            <td>{{ejercicio.nombre}}</td>
+            <td>{{ejercicio.descripcion}}</td>
+            <td>{{ejercicio.video}}</td>
+            <td>{{ejercicio.calorias | number:'1.2-2'}}</td>
+            <td>
+              <button type="button" class="btn btn-primary" (click)="ejercicioEditar(ejercicio.id)"><i class="bi bi-pencil"></i></button>
+              <button type="button" class="btn btn-danger" (click)="ejercicioEliminar(ejercicio.id)"><i class="bi bi-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

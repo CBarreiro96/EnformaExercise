@@ -1,0 +1,36 @@
+<app-encabezado></app-encabezado>
+<div class="row">
+  <div class="col col-4">
+    <div class="card" style="width: 100%;">
+      <div class="card-header">
+        Personas <button type="button" class="btn btn-warning" (click)="personaCrear()"><i class="bi bi-plus-circle"></i></button>
+      </div>
+      <table class="table" border="1">
+        <tbody>
+          <tr *ngFor="let persona of personas">
+            <td>{{persona.nombre}} {{persona.apellido}}</td>
+            <td>
+              <button [disabled]="!persona.entrenando" type="button" class="btn btn-warning" (click)="elegir(persona)"><i class="bi bi-eye"></i></button>&nbsp;
+              <button [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaEditar(persona.id)"><i class="bi bi-pencil"></i></button>&nbsp;
+              <button type="button" class="btn btn-primary" (click)="personaReporte(persona.id)"><i class="bi bi-clipboard-heart"></i></button>&nbsp;
+              <button [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaTerminar(persona.id)"><i class="bi bi-door-closed"></i></button>&nbsp;
+              <button type="button" class="btn btn-danger" (click)="personaEliminar(persona.id)"><i class="bi bi-trash"></i></button>&nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      </div>
+  <div class="col col-8">
+    <div *ngIf="elegida">
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">{{personaElegida.nombre}} {{personaElegida.apellido}}</h5>
+          <p class="card-text" *ngIf="personaElegida">
+            <app-persona-detalle [personaDetalle]="personaElegida"></app-persona-detalle>
+            <app-entrenamiento-persona-lista [entrenamientos]="entrenamientos" [personaDetalle]="personaElegida"></app-entrenamiento-persona-lista>          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
