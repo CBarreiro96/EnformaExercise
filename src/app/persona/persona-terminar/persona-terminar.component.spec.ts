@@ -4,6 +4,11 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { PersonaTerminarComponent } from './persona-terminar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
 
 describe('PersonaTerminarComponent', () => {
   let component: PersonaTerminarComponent;
@@ -11,7 +16,17 @@ describe('PersonaTerminarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonaTerminarComponent ]
+      imports: [
+        ReactiveFormsModule,
+        ToastrModule.forRoot(),
+        HttpClientModule,
+        RouterTestingModule,
+        FormsModule,
+      ],
+      declarations: [ 
+        PersonaTerminarComponent,
+        EncabezadoComponent 
+      ]
     })
     .compileComponents();
   }));

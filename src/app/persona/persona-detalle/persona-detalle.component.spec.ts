@@ -4,6 +4,10 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { PersonaDetalleComponent } from './persona-detalle.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('PersonaDetalleComponent', () => {
   let component: PersonaDetalleComponent;
@@ -11,6 +15,13 @@ describe('PersonaDetalleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        ReactiveFormsModule,
+        ToastrModule.forRoot(),
+        HttpClientModule,
+        RouterTestingModule,
+        FormsModule,
+      ],
       declarations: [ PersonaDetalleComponent ]
     })
     .compileComponents();

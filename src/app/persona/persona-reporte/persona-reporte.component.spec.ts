@@ -4,6 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { PersonaReporteComponent } from './persona-reporte.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
 
 describe('PersonaReporteComponent', () => {
   let component: PersonaReporteComponent;
@@ -11,7 +14,14 @@ describe('PersonaReporteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonaReporteComponent ]
+      imports: [
+        HttpClientModule,
+        RouterTestingModule,
+      ],
+      declarations: [ 
+        PersonaReporteComponent,
+        EncabezadoComponent 
+      ]
     })
     .compileComponents();
   }));
