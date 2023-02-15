@@ -4,6 +4,11 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { EntrenamientoCrearComponent } from './entrenamiento-crear.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
 
 describe('EntrenamientoCrearComponent', () => {
   let component: EntrenamientoCrearComponent;
@@ -11,9 +16,14 @@ describe('EntrenamientoCrearComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EntrenamientoCrearComponent ]
-    })
-    .compileComponents();
+      imports: [
+        RouterTestingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        ToastrModule.forRoot(),
+      ],
+      declarations: [EntrenamientoCrearComponent, EncabezadoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

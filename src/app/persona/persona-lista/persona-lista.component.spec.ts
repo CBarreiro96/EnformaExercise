@@ -4,6 +4,10 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { PersonaListaComponent } from './persona-lista.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { RouterTestingModule } from '@angular/router/testing';
+import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
 
 describe('PersonaListaComponent', () => {
   let component: PersonaListaComponent;
@@ -11,9 +15,9 @@ describe('PersonaListaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonaListaComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule, HttpClientModule, ToastrModule.forRoot()],
+      declarations: [PersonaListaComponent, EncabezadoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

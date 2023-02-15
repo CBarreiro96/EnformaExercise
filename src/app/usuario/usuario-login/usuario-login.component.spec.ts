@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { UsuarioLoginComponent } from './usuario-login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('UsuarioLoginComponent', () => {
   let component: UsuarioLoginComponent;
@@ -11,9 +13,9 @@ describe('UsuarioLoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UsuarioLoginComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule, ToastrModule.forRoot()],
+      declarations: [UsuarioLoginComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
