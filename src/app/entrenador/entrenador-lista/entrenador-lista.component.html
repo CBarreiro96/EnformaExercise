@@ -1,0 +1,16 @@
+<app-encabezado></app-encabezado>
+<div class="row">
+  <div class="col col-4">
+    <div class="card" style="width: 100%">
+      <div class="card-header">Entrenadores</div>
+      <table class="table" border="1">
+        <tbody>
+          <tr *ngFor="let entrenador of entrenadores">
+            <td>{{ entrenador.name }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
