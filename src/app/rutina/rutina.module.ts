@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { EncabezadoAppModule } from '../encabezado-app/encabezado-app.module';
 import { RutinaCrearComponent } from './rutina-crear/rutina-crear.component';
 import { RutinaListaComponent } from './rutina-lista/rutina-lista.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -21,7 +22,7 @@ import { RutinaListaComponent } from './rutina-lista/rutina-lista.component';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    EncabezadoAppModule
+    EncabezadoAppModule,
   ]
 })
 export class RutinaModule { }

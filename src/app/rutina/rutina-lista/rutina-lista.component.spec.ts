@@ -4,6 +4,10 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { RutinaListaComponent } from './rutina-lista.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
 
 describe('RutinaListaComponent', () => {
   let component: RutinaListaComponent;
@@ -11,7 +15,15 @@ describe('RutinaListaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RutinaListaComponent ]
+      imports: [
+        ToastrModule.forRoot(),
+        HttpClientModule,
+        RouterTestingModule,
+      ],
+      declarations: [ 
+        RutinaListaComponent,
+        EncabezadoComponent
+      ]
     })
     .compileComponents();
   }));

@@ -27,6 +27,7 @@ import { RutinaModule } from './rutina/rutina.module';
     PersonaModule,
     EjercicioModule,
     EntrenamientoModule,
+    RutinaModule,
     ToastrModule.forRoot({
       timeOut: 7000,
       positionClass: 'toast-bottom-right',
