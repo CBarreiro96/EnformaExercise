@@ -1,6 +1,5 @@
 /* tslint:disable:no-unused-variable */
-
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EntrenamientoService } from './entrenamiento.service';
@@ -8,15 +7,15 @@ import { EntrenamientoService } from './entrenamiento.service';
 describe('Service: Entrenamiento', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientModule,
-        RouterTestingModule,
-      ],
-      providers: [EntrenamientoService]
+      imports: [HttpClientTestingModule],
+      providers: [EntrenamientoService],
     });
   });
 
-  it('should ...', inject([EntrenamientoService], (service: EntrenamientoService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should ...', inject(
+    [EntrenamientoService],
+    (service: EntrenamientoService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

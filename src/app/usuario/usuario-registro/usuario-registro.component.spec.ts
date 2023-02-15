@@ -5,9 +5,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { UsuarioRegistroComponent } from './usuario-registro.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('UsuarioRegistroComponent', () => {
   let component: UsuarioRegistroComponent;
@@ -15,16 +15,9 @@ describe('UsuarioRegistroComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ReactiveFormsModule,
-        ToastrModule.forRoot(),
-        HttpClientModule,
-        RouterTestingModule,
-        FormsModule,
-      ],
-      declarations: [ UsuarioRegistroComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule, ReactiveFormsModule, ToastrModule.forRoot()],
+      declarations: [UsuarioRegistroComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -4,10 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { PersonaCrearComponent } from './persona-crear.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterTestingModule } from '@angular/router/testing';
 import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
 
 describe('PersonaCrearComponent', () => {
@@ -16,19 +15,9 @@ describe('PersonaCrearComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ReactiveFormsModule,
-        ToastrModule.forRoot(),
-        HttpClientModule,
-        RouterTestingModule,
-        FormsModule,
-      ],
-      declarations: [ 
-        PersonaCrearComponent,
-        EncabezadoComponent
-      ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule, ReactiveFormsModule, ToastrModule.forRoot()],
+      declarations: [PersonaCrearComponent, EncabezadoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
