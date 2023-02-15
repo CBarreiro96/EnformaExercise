@@ -4,15 +4,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { EncabezadoAppModule } from '../encabezado-app/encabezado-app.module';
 import { RutinaCrearComponent } from './rutina-crear/rutina-crear.component';
+import { RutinaListaComponent } from './rutina-lista/rutina-lista.component';
 
 
 
 @NgModule({
   exports: [
-    RutinaCrearComponent
+    RutinaCrearComponent,
+    RutinaListaComponent
   ],
   declarations: [
-    RutinaCrearComponent
+    RutinaCrearComponent,
+    RutinaListaComponent
   ],
   imports: [
     CommonModule,

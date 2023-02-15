@@ -50,7 +50,7 @@ export class RutinaCrearComponent implements OnInit {
 
   cancelarRutina(): void {
     this.rutinaForm.reset();
-    this.routerPath.navigate(['/ejercicio']);
+    this.routerPath.navigate(['/rutina']);
   }
 
 }

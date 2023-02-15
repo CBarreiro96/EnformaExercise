@@ -13,6 +13,7 @@ import { EjercicioEditarComponent } from './ejercicio/ejercicio-editar/ejercicio
 import { EntrenamientoCrearComponent } from './entrenamiento/entrenamiento-crear/entrenamiento-crear.component';
 import { EntrenamientoEditarComponent } from './entrenamiento/entrenamiento-editar/entrenamiento-editar.component';
 import { RutinaCrearComponent } from './rutina/rutina-crear/rutina-crear.component';
+import { RutinaListaComponent } from './rutina/rutina-lista/rutina-lista.component';
 
 const routes: Routes = [
   { path: '', component: UsuarioLoginComponent, pathMatch: 'full' },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'entrenamiento/crear/:idPersona', component: EntrenamientoCrearComponent,  pathMatch: 'full' },
   { path: 'entrenamiento/editar/:id', component: EntrenamientoEditarComponent,  pathMatch: 'full' },
   { path: 'rutina/crear', component: RutinaCrearComponent,  pathMatch: 'full' },
+  { path: 'rutina', component: RutinaListaComponent,  pathMatch: 'full' },
 
 ];
 
