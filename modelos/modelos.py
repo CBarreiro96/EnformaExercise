@@ -4,6 +4,7 @@ from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 db = SQLAlchemy()
 
+
 class Ejercicio(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(128))
@@ -37,6 +38,7 @@ class Usuario(db.Model):
     usuario = db.Column(db.String(50))
     contrasena = db.Column(db.String(50))
     personas = db.relationship('Persona', cascade='all, delete, delete-orphan')
+    rol = db.Column(db.String(20))
 
 
 class Entrenamiento(db.Model):
@@ -54,9 +56,10 @@ class EjercicioSchema(SQLAlchemyAutoSchema):
         include_relationships = True
         include_fk = True
         load_instance = True
-        
+
     id = fields.String()
     calorias = fields.String()
+
 
 class PersonaSchema(SQLAlchemyAutoSchema):
     class Meta:
@@ -64,7 +67,7 @@ class PersonaSchema(SQLAlchemyAutoSchema):
         include_relationships = True
         include_fk = True
         load_instance = True
-        
+
     id = fields.String()
     talla = fields.String()
     peso = fields.String()
@@ -80,20 +83,21 @@ class UsuarioSchema(SQLAlchemyAutoSchema):
         model = Usuario
         include_relationships = True
         load_instance = True
-        
+
     id = fields.String()
-        
+
 
 class ReporteGeneralSchema(Schema):
     persona = fields.Nested(PersonaSchema())
     imc = fields.Float()
     clasificacion_imc = fields.String()
 
+
 class ReporteDetalladoSchema(Schema):
     fecha = fields.String()
     repeticiones = fields.Float()
     calorias = fields.Float()
-    
+
 
 class EntrenamientoSchema(SQLAlchemyAutoSchema):
     class Meta:
@@ -101,6 +105,12 @@ class EntrenamientoSchema(SQLAlchemyAutoSchema):
         include_relationships = True
         include_fk = True
         load_instance = True
-    
+
     id = fields.String()
     repeticiones = fields.String()
+
+
+class Roles:
+    ADMIN = "Administrador"
+    CLIENTE = "Cliente"
+    ENTRENADOR = "Entrenador"
