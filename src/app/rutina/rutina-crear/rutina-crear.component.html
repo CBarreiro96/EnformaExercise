@@ -6,7 +6,7 @@
 
   <form
     [formGroup]="rutinaForm"
-  (ngSubmit)="!rutinaForm.invalid && crearRutina(rutinaForm.value)"
+    (ngSubmit)="!rutinaForm.invalid && crearRutina(rutinaForm.value)"
   >
     <div class="row">
       <div class="col">
@@ -50,17 +50,17 @@
           <div
             class="alert alert-danger alert-dismissible fade show"
             *ngIf="
-              rutinaForm.get('nombre')!.hasError('required') &&
-              rutinaForm.get('nombre')!.touched
+              rutinaForm.get('descripcion')!.hasError('required') &&
+              rutinaForm.get('descripcion')!.touched
             "
           >
             Contenido requerido
           </div>
           <div
             class="alert alert-danger alert-dismissible fade show"
-            *ngIf="rutinaForm.get('nombre')!.hasError('minlength')"
+            *ngIf="rutinaForm.get('descripcion')!.hasError('minlength')"
           >
-            El contenido es muy corto, debe tener al menos dos caracteres.
+            El contenido es muy corto, debe tener al menos 10 caracteres.
           </div>
         </div>
       </div>

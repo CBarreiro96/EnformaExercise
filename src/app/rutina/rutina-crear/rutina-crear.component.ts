@@ -24,13 +24,13 @@ export class RutinaCrearComponent implements OnInit {
   ngOnInit() {
     this.rutinaForm = this.formBuilder.group({
       nombre: ["", [Validators.required, Validators.minLength(2)]],
-      descripcion: ["", [Validators.required, Validators.minLength(50)]],
+      descripcion: ["", [Validators.required, Validators.minLength(10)]],
     });
   }
 
   crearRutina(rutina: Rutina): void {
     this.rutinaService.crearRutina(rutina).subscribe((rutina) => {
-      this.toastr.success("Confirmation", "Ejercicio creado")
+      this.toastr.success("Confirmation", "Rutina creada")
       this.rutinaForm.reset();
       this.routerPath.navigate(['/rutina']);
       },
