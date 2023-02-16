@@ -29,7 +29,7 @@ describe('EncabezadoComponent', () => {
 
   it('should show 3 menu items for Administrador role', () => {
     //entrenadores, ejercicios y salir
-    component.userRole = 'Administrador';
+    component.rolUsuario = 'Administrador';
     fixture.detectChanges();
     let menu = debug.queryAll(By.css('a.nav-link'));
     expect(menu[0].nativeElement.textContent).toEqual('Entrenadores');
@@ -39,7 +39,7 @@ describe('EncabezadoComponent', () => {
 
   it('should show 4 menu items for Entrenador role', () => {
     //personas, ejercicios, rutinas y salir
-    component.userRole = 'Entrenador';
+    component.rolUsuario = 'Entrenador';
     fixture.detectChanges();
     let menu = debug.queryAll(By.css('a.nav-link'));
     expect(menu[0].nativeElement.textContent).toEqual('Personas');

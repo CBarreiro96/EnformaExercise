@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./encabezado.component.css'],
 })
 export class EncabezadoComponent implements OnInit {
-  userRole: string = '';
+  rolUsuario: string = '';
   constructor() {}
 
   ngOnInit() {
-    this.userRole = sessionStorage.getItem('userRole');
+    this.rolUsuario = sessionStorage.getItem('rolUsuario');
   }
 }

@@ -1,19 +1,14 @@
 /* tslint:disable:no-unused-variable */
-
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed, async, inject } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { PersonaService } from './persona.service';
 
 describe('Service: Persona', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientModule,
-        RouterTestingModule,
-      ],
-      providers: [PersonaService]
+      imports: [HttpClientTestingModule],
+      providers: [PersonaService],
     });
   });
 
