@@ -36,12 +36,12 @@ export class UsuarioLoginComponent implements OnInit {
         );
         sessionStorage.setItem('token', res.token);
         sessionStorage.setItem('idUsuario', res.id);
-        sessionStorage.setItem('userRole', res.userRole);
+        sessionStorage.setItem('rolUsuario', res.rol);
         this.toastrService.success('Login ok', 'Información', {
           closeButton: true,
         });
-        if ('Administrador') this.router.navigate([`/persona`]); //entrenador
-        else if ('Entrenador') this.router.navigate([`/persona`]);
+        if (res.rol == 'Administrador') this.router.navigate([`/persona`]);
+        else if (res.rol == 'Entrenador') this.router.navigate([`/persona`]);
       },
       (error) => {
         this.error = 'Usuario o contraseña incorrectos';
