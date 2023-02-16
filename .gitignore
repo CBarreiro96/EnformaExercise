@@ -6,7 +6,7 @@
 /dist
 /tmp
 /out-tsc
-/bazel-out
+/bazel-outnod
 
 # Node
 /node_modules
