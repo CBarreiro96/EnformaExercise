@@ -5,6 +5,8 @@ import { DebugElement } from '@angular/core';
 
 import { PersonaReporteComponent } from './persona-reporte.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
 
@@ -15,13 +17,13 @@ describe('PersonaReporteComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule,
         RouterTestingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ToastrModule.forRoot(),
       ],
-      declarations: [ 
-        PersonaReporteComponent,
-        EncabezadoComponent 
-      ]
+      declarations: [ PersonaReporteComponent, EncabezadoComponent]
     })
     .compileComponents();
   }));

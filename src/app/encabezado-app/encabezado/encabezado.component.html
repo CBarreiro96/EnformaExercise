@@ -1,21 +1,59 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#opciones"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <!-- enlaces -->
-  <div class="collapse navbar-collapse" id="opciones">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/persona">Personas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/ejercicio">Ejercicios</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/">Salir</a>
-      </li>
-    </ul>
-  </div>
+  <container-element [ngSwitch]="rolUsuario">
+    <div
+      class="collapse navbar-collapse"
+      id="opciones"
+      *ngSwitchCase="'Administrador'"
+    >
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="/entrenador" class="nav-link">Entrenadores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/ejercicio">Ejercicios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Salir</a>
+        </li>
+      </ul>
+    </div>
+    <div
+      class="collapse navbar-collapse"
+      id="opciones"
+      *ngSwitchCase="'Entrenador'"
+    >
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/persona">Personas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/ejercicio">Ejercicios</a>
+        </li>
+        <li class="nav-item">
+          <a href="/rutina" class="nav-link">Rutinas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Salir</a>
+        </li>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="opciones" *ngSwitchDefault>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Salir</a>
+        </li>
+      </ul>
+    </div>
+  </container-element>
 </nav>
-<br/>
+<br />

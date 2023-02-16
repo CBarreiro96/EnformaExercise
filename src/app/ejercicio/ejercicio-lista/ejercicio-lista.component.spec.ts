@@ -4,10 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { EjercicioListaComponent } from './ejercicio-lista.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule } from 'ngx-toastr';
 import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
 
 describe('EjercicioListaComponent', () => {
@@ -16,19 +14,9 @@ describe('EjercicioListaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ReactiveFormsModule,
-        ToastrModule.forRoot(),
-        HttpClientModule,
-        RouterTestingModule,
-        FormsModule,
-      ],
-      declarations: [ 
-        EjercicioListaComponent,
-        EncabezadoComponent 
-      ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule, ToastrModule.forRoot()],
+      declarations: [EjercicioListaComponent, EncabezadoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

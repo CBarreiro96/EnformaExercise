@@ -4,10 +4,10 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { EntrenamientoCrearComponent } from './entrenamiento-crear.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
 
 describe('EntrenamientoCrearComponent', () => {
@@ -17,18 +17,13 @@ describe('EntrenamientoCrearComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        RouterTestingModule,
+        HttpClientModule,
         ReactiveFormsModule,
         ToastrModule.forRoot(),
-        HttpClientModule,
-        RouterTestingModule,
-        FormsModule,
       ],
-      declarations: [ 
-        EntrenamientoCrearComponent,
-        EncabezadoComponent 
-      ]
-    })
-    .compileComponents();
+      declarations: [EntrenamientoCrearComponent, EncabezadoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

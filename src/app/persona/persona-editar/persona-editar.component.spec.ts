@@ -4,11 +4,11 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { PersonaEditarComponent } from './persona-editar.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { EncabezadoComponent } from '../../encabezado-app/encabezado/encabezado.component';
 
 describe('PersonaEditarComponent', () => {
   let component: PersonaEditarComponent;
@@ -17,18 +17,13 @@ describe('PersonaEditarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        RouterTestingModule,
+        HttpClientModule,
         ReactiveFormsModule,
         ToastrModule.forRoot(),
-        HttpClientModule,
-        RouterTestingModule,
-        FormsModule,
       ],
-      declarations: [ 
-        PersonaEditarComponent,
-        EncabezadoComponent 
-      ]
-    })
-    .compileComponents();
+      declarations: [PersonaEditarComponent, EncabezadoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
