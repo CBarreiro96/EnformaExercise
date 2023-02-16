@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Entrenador } from '../entrenador';
+import { EntrenadorService } from '../entrenador.service';
 
 @Component({
   selector: 'app-entrenador-lista',
@@ -9,7 +10,11 @@ import { Entrenador } from '../entrenador';
 export class EntrenadorListaComponent implements OnInit {
   entrenadores: Array<Entrenador> = [];
 
-  constructor() {}
+  constructor(private entrenadorService: EntrenadorService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.entrenadorService.darEntrenadores().subscribe((entrenadores) => {
+      this.entrenadores = entrenadores;
+    });
+  }
 }

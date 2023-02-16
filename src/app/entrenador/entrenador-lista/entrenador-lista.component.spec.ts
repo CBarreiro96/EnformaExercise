@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { EntrenadorListaComponent } from './entrenador-lista.component';
+import { EncabezadoComponent } from '../../encabezado-app/encabezado/encabezado.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('EntrenadorListaComponent', () => {
   let component: EntrenadorListaComponent;
@@ -11,9 +13,9 @@ describe('EntrenadorListaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EntrenadorListaComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule],
+      declarations: [EntrenadorListaComponent, EncabezadoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
