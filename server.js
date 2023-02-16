@@ -3,10 +3,10 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(__dirname + '/dist/proyect-frontend'));
+app.use(express.static(__dirname + '/dist/proyecto-frontend'));
 
 app.get('/*', function(req,res) {
-res.sendFile(path.join(__dirname+'/dist/proyect-frontend/index.html'));
+res.sendFile(path.join(__dirname+'/dist/proyecto-frontend/index.html'));
 });
 
 app.listen(process.env.PORT || 5000);
