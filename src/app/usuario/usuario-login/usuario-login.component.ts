@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from '../usuario.service';
@@ -7,18 +7,17 @@ import { UsuarioService } from '../usuario.service';
 @Component({
   selector: 'app-usuario-login',
   templateUrl: './usuario-login.component.html',
-  styleUrls: ['./usuario-login.component.css']
+  styleUrls: ['./usuario-login.component.css'],
 })
-
 export class UsuarioLoginComponent implements OnInit {
-
-  error: string = "";
+  error: string = '';
   helper = new JwtHelperService();
 
   constructor(
     private usuarioService: UsuarioService,
     private toastrService: ToastrService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit() {
     sessionStorage.setItem('decodedToken', '');
@@ -27,18 +26,26 @@ export class UsuarioLoginComponent implements OnInit {
   }
 
   loginUsuario(usuario: string, contrasena: string) {
-    this.error = ""
+    this.error = '';
 
-    this.usuarioService.login(usuario, contrasena)
-      .subscribe(res => {
-        sessionStorage.setItem('decodedToken', this.helper.decodeToken(res.token));
+    this.usuarioService.login(usuario, contrasena).subscribe(
+      (res) => {
+        sessionStorage.setItem(
+          'decodedToken',
+          this.helper.decodeToken(res.token)
+        );
         sessionStorage.setItem('token', res.token);
         sessionStorage.setItem('idUsuario', res.id);
-        this.toastrService.success("Login ok", "Información", {closeButton: true});
-        this.router.navigate([`/persona`])
+        sessionStorage.setItem('rolUsuario', res.rol);
+        this.toastrService.success('Login ok', 'Información', {
+          closeButton: true,
+        });
+        if (res.rol == 'Administrador') this.router.navigate([`/persona`]);
+        else if (res.rol == 'Entrenador') this.router.navigate([`/persona`]);
       },
-        error => {
-          this.error = "Usuario o contraseña incorrectos";
-        })
+      (error) => {
+        this.error = 'Usuario o contraseña incorrectos';
+      }
+    );
   }
 }

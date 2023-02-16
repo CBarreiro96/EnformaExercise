@@ -4,6 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { EjercicioListaComponent } from './ejercicio-lista.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
 
 describe('EjercicioListaComponent', () => {
   let component: EjercicioListaComponent;
@@ -11,9 +14,9 @@ describe('EjercicioListaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EjercicioListaComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule, ToastrModule.forRoot()],
+      declarations: [EjercicioListaComponent, EncabezadoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
