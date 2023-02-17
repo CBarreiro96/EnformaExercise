@@ -9,7 +9,7 @@ jobs:
       if: contains(github.event.head_commit.message, 'RELEASE')
       steps:      
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Crear rama release
         run: |
           git checkout -b release
@@ -20,12 +20,12 @@ jobs:
       needs: Crear-release
       steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Configuración de entorno
         if: github.ref == 'refs/heads/release'
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
-            python-version: '3.8.10'
+            python-version: '3.9'
       - name: Instalación de dependencias
         run: |
           python -m pip install --upgrade pip
