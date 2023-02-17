@@ -1,6 +1,5 @@
 # Virtual enviroment
 env/
-dbapp.sqlite
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -144,5 +143,5 @@ cython_debug/
 .vscode
 .idea/*
 
-#DataBase
+#DataBase TEST
 test.db
