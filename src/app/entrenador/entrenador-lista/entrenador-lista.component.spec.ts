@@ -27,4 +27,6 @@ describe('EntrenadorListaComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show 10 entrenadores', () => {});
 });
