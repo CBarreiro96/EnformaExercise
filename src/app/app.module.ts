@@ -11,6 +11,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { PersonaModule } from './persona/persona.module';
 import { EjercicioModule} from './ejercicio/ejercicio.module';
 import { EntrenamientoModule } from './entrenamiento/entrenamiento.module';
+import { RutinaModule } from './rutina/rutina.module';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,14 @@ import { EntrenamientoModule } from './entrenamiento/entrenamiento.module';
     PersonaModule,
     EjercicioModule,
     EntrenamientoModule,
+    RutinaModule,
     ToastrModule.forRoot({
       timeOut: 7000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RutinaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
