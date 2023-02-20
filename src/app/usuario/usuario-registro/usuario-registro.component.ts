@@ -27,12 +27,19 @@ export class UsuarioRegistroComponent implements OnInit {
     this.usuarioForm = this.formBuilder.group({
       usuario: ["", [Validators.required, Validators.maxLength(50)]],
       password: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(4)]],
-      confirmPassword: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(4)]]
+      confirmPassword: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(4)]],
+      nombre: ["", [Validators.required, Validators.maxLength(10)]],
+      apellido: ["", [Validators.required, Validators.maxLength(20)]]
     });
   }
 
   registrarUsuario() {
-    this.usuarioService.registro(this.usuarioForm.get('usuario')?.value, this.usuarioForm.get('password')?.value)
+    this.usuarioService.registro(
+      this.usuarioForm.get('usuario')?.value, 
+      this.usuarioForm.get('password')?.value,
+      this.usuarioForm.get('nombre')?.value,
+      this.usuarioForm.get('apellido')?.value
+      )
       .subscribe(res => {
         this.router.navigate([`/`])
       },

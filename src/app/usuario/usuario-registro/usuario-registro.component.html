@@ -76,32 +76,32 @@
           </div>
           <div class="form-group">
             <div class="mb-3 row">
-              <label for="usuario" class="col-lg-3 col-form-label">Nombres</label>
+              <label for="nombre" class="col-lg-3 col-form-label">Nombres</label>
               <div class="col-lg-9  ">
-                <input formControlName="usuario" type="text" class="form-control" placeholder="Nombres">
+                <input formControlName="nombre" type="text" class="form-control" placeholder="Nombres">
               </div>
             </div>
             <div class="alert alert-danger my-3"
-              *ngIf="usuarioForm.get('usuario')?.hasError('required') && usuarioForm.get('usuario')?.touched">
+              *ngIf="usuarioForm.get('nombre')?.hasError('required') && usuarioForm.get('nombre')?.touched">
               Debe ingresar un Nombre para registrarse
             </div>
-            <div class="alert alert-danger my-3" *ngIf="usuarioForm.get('usuario')?.hasError('maxlength')">
+            <div class="alert alert-danger my-3" *ngIf="usuarioForm.get('nombre')?.hasError('maxlength')">
               El Nombre no debe exceder los 50 carácteres
             </div>
 
           </div>
           <div class="form-group">
             <div class="mb-3 row">
-              <label for="usuario" class="col-lg-3 col-form-label">Apellidos</label>
+              <label for="apellido" class="col-lg-3 col-form-label">Apellidos</label>
               <div class="col-lg-9  ">
-                <input formControlName="usuario" type="text" class="form-control" placeholder="Apellidos">
+                <input formControlName="apellido" type="text" class="form-control" placeholder="Apellidos">
               </div>
             </div>
             <div class="alert alert-danger my-3"
-              *ngIf="usuarioForm.get('usuario')?.hasError('required') && usuarioForm.get('usuario')?.touched">
+              *ngIf="usuarioForm.get('apellido')?.hasError('required') && usuarioForm.get('apellido')?.touched">
               Debe ingresar por los apellidos para registrarse
             </div>
-            <div class="alert alert-danger my-3" *ngIf="usuarioForm.get('usuario')?.hasError('maxlength')">
+            <div class="alert alert-danger my-3" *ngIf="usuarioForm.get('apellido')?.hasError('maxlength')">
               El Nombre no debe exceder los 50 carácteres
             </div>
 
