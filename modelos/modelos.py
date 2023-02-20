@@ -40,6 +40,12 @@ class Usuario(db.Model):
     personas = db.relationship('Persona', cascade='all, delete, delete-orphan')
     rol = db.Column(db.String(20))
 
+class Entrenador (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre=db.Column(db.String(60))
+    apellidos = db.Column(db.String(60))
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+
 
 class Entrenamiento(db.Model):
     id = db.Column(db.Integer, primary_key=True)
