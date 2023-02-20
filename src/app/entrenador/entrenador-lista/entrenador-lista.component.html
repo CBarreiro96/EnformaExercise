@@ -5,30 +5,26 @@
       <div class="card-header">Entrenadores</div>
       <table class="table" border="1">
         <tbody>
-          <tr *ngFor="let entrenador of entrenadores">
+          <tr
+            *ngFor="
+              let entrenador of entrenadores
+                | slice : (page - 1) * pageSize : page * pageSize
+            "
+          >
             <td>{{ entrenador.nombre }} {{ entrenador.apellido }}</td>
             <td></td>
           </tr>
         </tbody>
       </table>
-      <div class="d-flex justify-content-between p-2">
-        <ngb-pagination
-          [collectionSize]="collectionSize"
-          [(page)]="page"
-          [pageSize]="pageSize"
-        >
-        </ngb-pagination>
-
-        <select
-          class="custom-select"
-          style="width: auto"
-          [(ngModel)]="pageSize"
-        >
-          <option [ngValue]="2">2 items per page</option>
-          <option [ngValue]="4">4 items per page</option>
-          <option [ngValue]="6">6 items per page</option>
-        </select>
-      </div>
+      <ngb-pagination
+        class="d-flex justify-content-center"
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="entrenadores.length"
+        [boundaryLinks]="true"
+        [maxSize]="3"
+        [rotate]="true"
+      ></ngb-pagination>
     </div>
   </div>
 </div>
