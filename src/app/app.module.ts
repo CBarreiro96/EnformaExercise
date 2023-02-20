@@ -14,9 +14,9 @@ import { EntrenamientoModule } from './entrenamiento/entrenamiento.module';
 import { RutinaModule } from './rutina/rutina.module';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent
-  ],
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
