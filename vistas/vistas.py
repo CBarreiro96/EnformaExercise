@@ -12,7 +12,7 @@ from modelos import \
     Persona, PersonaSchema, \
     Entrenamiento, EntrenamientoSchema, \
     Usuario, UsuarioSchema, \
-    ReporteGeneralSchema, ReporteDetalladoSchema
+    ReporteGeneralSchema, ReporteDetalladoSchema, Roles,Entrenador
 
 
 ejercicio_schema = EjercicioSchema()
@@ -47,7 +47,22 @@ class VistaSignIn(Resource):
         db.session.delete(usuario)
         db.session.commit()
         return '', 204
+class EntrenadorSingUp(Resource):
 
+    def Post (self):
+        usuario = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
+        if usuario is None:
+            contrasena_encriptada = hashlib.md5(request.json["contrasena"].encode('utf-8')).hexdigest()
+            nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=contrasena_encriptada,rol=Roles.ENTRENADOR)
+            db.session.add(nuevo_usuario)
+            db.session.commit()
+            nuevo_usuario = db.Usuario.query.filter(nuevo_usuario).first()
+            id_usuario = nuevo_usuario.id
+            Entrenador (nombre=request.json["nombre"], apellidos= request.json["apellidos"], usuario_id=id_usuario)
+
+            return {"mensaje": "usuario entrenador creado exitosamente", "id": nuevo_usuario.id}
+        else:
+            return "Elija un nombre de usaurio diferente", 404
 
 class VistaLogIn(Resource):
 

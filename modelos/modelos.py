@@ -37,6 +37,13 @@ class Usuario(db.Model):
     usuario = db.Column(db.String(50))
     contrasena = db.Column(db.String(50))
     personas = db.relationship('Persona', cascade='all, delete, delete-orphan')
+    rol = db.Column(db.String(20))
+
+class Entrenador (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre=db.Column(db.String(60))
+    apellidos = db.Column(db.String(60))
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
 
 
 class Entrenamiento(db.Model):
@@ -104,3 +111,9 @@ class EntrenamientoSchema(SQLAlchemyAutoSchema):
     
     id = fields.String()
     repeticiones = fields.String()
+
+
+class Roles:
+    ADMIN = "Administrador"
+    CLIENTE = "Cliente"
+    ENTRENADOR = "Entrenador"
