@@ -1,0 +1,33 @@
+<app-encabezado></app-encabezado>
+
+<div class="row">
+  <div class="col col-4">
+    <div class="card" style="width: 100%;">
+      <div class="card-header">
+        Rutinas <button type="button" class="btn btn-warning" (click)="rutinaCrear()"><i class="bi bi-plus-circle"></i></button>
+      </div>
+      <table class="table" border="1">
+        <tbody>
+          <tr *ngFor="let rutina of rutinas">
+            <td>{{rutina.nombre}}</td>
+            <td>
+              <button [disabled]="!rutina.ejercicio" type="button" class="btn btn-warning" (click)="elegir(rutina)"><i class="bi bi-eye"></i></button>&nbsp;
+              <button [disabled]="!rutina.ejercicio" type="button" class="btn btn-primary" (click)="rutinaEditar(rutina.id)"><i class="bi bi-pencil"></i></button>&nbsp;
+              <button type="button" class="btn btn-danger" (click)="rutinaEliminar(rutina.id)"><i class="bi bi-trash"></i></button>&nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      </div>
+  <div class="col col-8">
+    <div *ngIf="elegida">
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">{{rutinaElegida.nombre}}</h5>
+          <p class="text">{{rutinaElegida.descripcion}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
