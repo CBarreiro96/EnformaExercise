@@ -16,7 +16,7 @@ export class EntrenadorService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${sessionStorage.getItem('token')}`
     });
-    return this.httpClient.get<Entrenador[]>(`${this.apiUrl}/entrenador`, {
+    return this.httpClient.get<Entrenador[]>(`${this.apiUrl}/entrenadores`, {
       headers: headers,
     });
   }
