@@ -7,8 +7,8 @@ from modelos import db
 from vistas import \
     VistaSignIn, VistaLogIn, \
     VistaPersona, VistaPersonas, \
-	VistaEjercicio, VistaEjercicios, \
-	VistaEntrenamiento, VistaEntrenamientos, \
+    VistaEjercicio, VistaEjercicios, \
+    VistaEntrenamiento, VistaEntrenamientos, \
     VistaReporte
 
 app = Flask(__name__)
@@ -35,5 +35,6 @@ api.add_resource(VistaEjercicio, '/ejercicio/<int:id_ejercicio>')
 api.add_resource(VistaEntrenamientos, '/entrenamientos/<int:id_persona>')
 api.add_resource(VistaEntrenamiento, '/entrenamiento/<int:id_entrenamiento>')
 api.add_resource(VistaReporte, '/persona/<int:id_persona>/reporte')
-
+if __name__ == "__main__":
+    app.run(debug=True)
 jwt = JWTManager(app)
