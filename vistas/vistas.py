@@ -263,4 +263,5 @@ class VistaEntrenadores(Resource):
     @jwt_required()
     def get(self):
         entrenadores = Entrenador.query.all()
-        return [entrenador_schema.dump(entrenador) for entrenador in entrenadores]
+        entrenadores_ordenados = sorted(entrenadores, key=lambda entrenador: entrenador.nombre.lower())
+        return [entrenador_schema.dump(entrenador) for entrenador in entrenadores_ordenados]
