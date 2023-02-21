@@ -45,6 +45,7 @@ class testEntrenador(unittest.TestCase):
                                            data=json.dumps(usuario_entrenador),
                                            headers={'Content-Type': 'application/json','status_code':200})
 
+
         respuesta_signup = json.loads(entrenador_signup.get_data())
 
         usuario_id = respuesta_signup["id"]
