@@ -12,7 +12,7 @@ import { UsuarioService } from '../usuario.service';
 export class UsuarioRegistroComponent implements OnInit {
 
   // Declaración de la variable usuarioForm de tipo FormGroup, que representa el formulario de registro
-  usuarioForm: FormGroup;
+  usuarioForm!: FormGroup;
 
   constructor(
     // Inyección de servicios necesarios para el registro de usuario
@@ -21,10 +21,7 @@ export class UsuarioRegistroComponent implements OnInit {
     private router: Router, // servicio para redirigir a otra página después del registro
     private toastrService: ToastrService // servicio para mostrar mensajes al usuario
   )
-  {
-    // Inicialización del formulario como un FormGroup vacío
-    this.usuarioForm = new FormGroup('')
-  }
+  {}
 
   ngOnInit() {
     // Construcción del formulario mediante el FormBuilder, definiendo los campos del formulario y sus validadores
@@ -52,5 +49,19 @@ export class UsuarioRegistroComponent implements OnInit {
         error => { // Se muestra un mensaje de error si el registro falló
           this.toastrService.error("Error en el registro. Verifique que el usuario no se encuentre ya registrado", "Error", {closeButton: true});
       })
+    }
+
+    get usuario() {
+      return this.usuarioForm.get('usuario');
+    }
+
+    get password() {
+      return this.usuarioForm.get('password');
+    }
+    get nombre() {
+      return this.usuarioForm.get('nombre');
+    }
+    get apellido() {
+      return this.usuarioForm.get('apellido');
     }
 }
