@@ -67,7 +67,7 @@
               La contraseña no debe exceder los 50 carácteres
             </div>
             <div class="alert alert-danger my-3" *ngIf="usuarioForm.get('confirmPassword')?.hasError('minlength')">
-              La contraseña debe tener más de 4 carácteres
+              La contraseña debe tener más de 8 carácteres
             </div>
             <div class="alert alert-danger my-3"
               *ngIf="usuarioForm.get('confirmPassword')?.value !== usuarioForm.get('password')?.value">
@@ -88,6 +88,9 @@
             <div class="alert alert-danger my-3" *ngIf="usuarioForm.get('nombre')?.hasError('maxlength')">
               El Nombre no debe exceder los 60 carácteres
             </div>
+            <div class="alert alert-danger my-3" *ngIf="usuarioForm.get('nombre')?.hasError('minlength')">
+              El Nombre debe tener más de 3 carácteres
+            </div>
 
           </div>
           <div class="form-group">
@@ -103,6 +106,9 @@
             </div>
             <div class="alert alert-danger my-3" *ngIf="usuarioForm.get('apellido')?.hasError('maxlength')">
               El Nombre no debe exceder los 60 carácteres
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="usuarioForm.get('apellido')?.hasError('minlength')">
+              El apellido debe tener más de 3 carácteres
             </div>
 
           </div>

@@ -27,8 +27,8 @@ export class UsuarioRegistroComponent implements OnInit {
     // Construcción del formulario mediante el FormBuilder, definiendo los campos del formulario y sus validadores
     this.usuarioForm = this.formBuilder.group({
       usuario: ["", [Validators.required, Validators.maxLength(50)]],
-      password: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(4)]],
-      confirmPassword: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(4)]],
+      password: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(8)]],
+      confirmPassword: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(8)]],
       nombre: ["", [Validators.required, Validators.maxLength(60), Validators.minLength(3)]],
       apellido: ["", [Validators.required, Validators.maxLength(60), Validators.minLength(3)]]
     });
