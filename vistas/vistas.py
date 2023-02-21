@@ -253,3 +253,10 @@ class VistaReporte(Resource):
         reporte_persona_schema['resultados'] = utilidad.dar_resultados(data_persona.entrenamientos)
 
         return reporte_persona_schema
+
+class VistaEntrenadores(Resource):
+
+    @jwt_required()
+    def get(self):
+        entrenadores = Entrenador.query.all()
+        return [entrenador_schema.dump(entrenador) for entrenador in entrenadores]
