@@ -11,6 +11,7 @@ import { faker } from '@faker-js/faker';
 
 
 describe('UsuarioRegistroComponent', () => {
+  let debug: DebugElement;
   let component: UsuarioRegistroComponent;
   let fixture: ComponentFixture<UsuarioRegistroComponent>;
 
@@ -25,6 +26,7 @@ describe('UsuarioRegistroComponent', () => {
     fixture = TestBed.createComponent(UsuarioRegistroComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    debug = fixture.debugElement;
   });
 
   it('should create', () => {
@@ -42,9 +44,10 @@ describe('UsuarioRegistroComponent', () => {
   it('form valid when is full', () => {
     component.usuario?.setValue(faker.datatype.string(50));
     component.password?.setValue(faker.datatype.string(50));
+    component.confirmpassword?.setValue(faker.datatype.string(50))
     component.nombre?.setValue(faker.datatype.string(60));
     component.apellido?.setValue(faker.datatype.string(60));
 
-    expect(component.usuarioForm?.valid).toBeTruthy();
+    expect(component.usuarioForm.valid).toBeTruthy()
   });
 });

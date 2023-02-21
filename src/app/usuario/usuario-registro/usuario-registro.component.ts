@@ -58,6 +58,9 @@ export class UsuarioRegistroComponent implements OnInit {
     get password() {
       return this.usuarioForm.get('password');
     }
+    get confirmpassword() {
+      return this.usuarioForm.get('confirmPassword');
+    }
     get nombre() {
       return this.usuarioForm.get('nombre');
     }
