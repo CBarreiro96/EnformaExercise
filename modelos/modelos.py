@@ -33,6 +33,7 @@ class Persona(db.Model):
     usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
     entrenador = db.Column(db.Integer, db.ForeignKey('entrenador.id'))
 
+
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usuario = db.Column(db.String(50))
@@ -41,9 +42,10 @@ class Usuario(db.Model):
     entrenadores = db.relationship('Entrenador', cascade='all, delete, delete-orphan')
     rol = db.Column(db.String(20))
 
-class Entrenador (db.Model):
+
+class Entrenador(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nombre=db.Column(db.String(60))
+    nombre = db.Column(db.String(60))
     apellidos = db.Column(db.String(60))
     usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
     personas = db.relationship('Persona')
@@ -117,6 +119,7 @@ class EntrenamientoSchema(SQLAlchemyAutoSchema):
     id = fields.String()
     repeticiones = fields.String()
 
+
 class EntrenadorSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Entrenador
@@ -126,6 +129,7 @@ class EntrenadorSchema(SQLAlchemyAutoSchema):
 
     id = fields.String()
     usuario = fields.String()
+
 
 class Roles:
     ADMIN = "Administrador"

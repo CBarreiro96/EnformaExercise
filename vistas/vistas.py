@@ -11,8 +11,8 @@ from modelos import \
     Ejercicio, EjercicioSchema, \
     Persona, PersonaSchema, \
     Entrenamiento, EntrenamientoSchema, \
-    Usuario, UsuarioSchema, Entrenador,\
-    ReporteGeneralSchema, ReporteDetalladoSchema, Roles
+    Usuario, UsuarioSchema, Entrenador, \
+    ReporteGeneralSchema, ReporteDetalladoSchema, Roles, EntrenadorSchema
 
 ejercicio_schema = EjercicioSchema()
 persona_schema = PersonaSchema()
@@ -20,6 +20,7 @@ entrenamiento_schema = EntrenamientoSchema()
 usuario_schema = UsuarioSchema()
 reporte_general_schema = ReporteGeneralSchema()
 reporte_detallado_schema = ReporteDetalladoSchema()
+entrenador_schema = EntrenadorSchema()
 
 
 class VistaSignIn(Resource):
@@ -40,7 +41,7 @@ class VistaSignIn(Resource):
             # token_de_acceso = create_access_token(identity=nuevo_usuario.id)
             return {"mensaje": "usuario creado exitosamente", "id": nuevo_usuario.id}
         else:
-            return {"mensaje":"El usuario ya existe"}, 404
+            return {"mensaje": "El usuario ya existe"}, 404
 
     def put(self, id_usuario):
         usuario = Usuario.query.get_or_404(id_usuario)
@@ -53,6 +54,8 @@ class VistaSignIn(Resource):
         db.session.delete(usuario)
         db.session.commit()
         return '', 204
+
+
 class VistaLogIn(Resource):
 
     def post(self):
@@ -253,3 +256,12 @@ class VistaReporte(Resource):
         reporte_persona_schema['resultados'] = utilidad.dar_resultados(data_persona.entrenamientos)
 
         return reporte_persona_schema
+
+
+class VistaEntrenadores(Resource):
+
+    @jwt_required()
+    def get(self):
+        entrenadores = Entrenador.query.all()
+        entrenadores_ordenados = sorted(entrenadores, key=lambda entrenador: entrenador.nombre.lower())
+        return [entrenador_schema.dump(entrenador) for entrenador in entrenadores_ordenados]
