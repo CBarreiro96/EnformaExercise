@@ -9,7 +9,7 @@ from vistas import \
     VistaPersona, VistaPersonas, \
     VistaEjercicio, VistaEjercicios, \
     VistaEntrenamiento, VistaEntrenamientos, \
-    VistaReporte, VistaEntrenadorSingUp
+    VistaReporte
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dbapp.sqlite'
@@ -28,7 +28,6 @@ cors = CORS(app)
 api = Api(app)
 api.add_resource(VistaSignIn, '/signin')
 api.add_resource(VistaLogIn, '/login')
-api.add_resource(VistaEntrenadorSingUp, '/entrenador/singup')
 api.add_resource(VistaPersonas, '/personas/<int:id_usuario>')
 api.add_resource(VistaPersona, '/persona/<int:id_persona>')
 api.add_resource(VistaEjercicios, '/ejercicios')
@@ -36,5 +35,6 @@ api.add_resource(VistaEjercicio, '/ejercicio/<int:id_ejercicio>')
 api.add_resource(VistaEntrenamientos, '/entrenamientos/<int:id_persona>')
 api.add_resource(VistaEntrenamiento, '/entrenamiento/<int:id_entrenamiento>')
 api.add_resource(VistaReporte, '/persona/<int:id_persona>/reporte')
-
+if __name__ == "__main__":
+    app.run(debug=True)
 jwt = JWTManager(app)

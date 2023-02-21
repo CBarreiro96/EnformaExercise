@@ -21,30 +21,32 @@ class Persona(db.Model):
     talla = db.Column(db.Numeric)
     peso = db.Column(db.Numeric)
     edad = db.Column(db.Numeric)
-    ingreso = db.Column(db.Date)
+    ingreso = db.Column(db.DateTime)
     brazo = db.Column(db.Numeric)
     pecho = db.Column(db.Numeric)
     cintura = db.Column(db.Numeric)
     pierna = db.Column(db.Numeric)
     entrenando = db.Column(db.Boolean, default=True)
     razon = db.Column(db.String(512))
-    terminado = db.Column(db.Date)
+    terminado = db.Column(db.DateTime)
     entrenamientos = db.relationship('Entrenamiento', cascade='all, delete, delete-orphan')
     usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
-
+    entrenador = db.Column(db.Integer, db.ForeignKey('entrenador.id'))
 
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usuario = db.Column(db.String(50))
     contrasena = db.Column(db.String(50))
     personas = db.relationship('Persona', cascade='all, delete, delete-orphan')
+    entrenadores = db.relationship('Entrenador', cascade='all, delete, delete-orphan')
     rol = db.Column(db.String(20))
 
 class Entrenador (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre=db.Column(db.String(60))
     apellidos = db.Column(db.String(60))
-    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+    usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+    personas = db.relationship('Persona')
 
 
 class Entrenamiento(db.Model):
@@ -115,6 +117,15 @@ class EntrenamientoSchema(SQLAlchemyAutoSchema):
     id = fields.String()
     repeticiones = fields.String()
 
+class EntrenadorSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Entrenador
+        include_relationships = True
+        include_fk = True
+        load_instance = True
+
+    id = fields.String()
+    usuario = fields.String()
 
 class Roles:
     ADMIN = "Administrador"

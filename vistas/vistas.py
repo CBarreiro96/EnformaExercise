@@ -11,7 +11,7 @@ from modelos import \
     Ejercicio, EjercicioSchema, \
     Persona, PersonaSchema, \
     Entrenamiento, EntrenamientoSchema, \
-    Usuario, UsuarioSchema, \
+    Usuario, UsuarioSchema, Entrenador,\
     ReporteGeneralSchema, ReporteDetalladoSchema, Roles
 
 ejercicio_schema = EjercicioSchema()
@@ -30,12 +30,17 @@ class VistaSignIn(Resource):
             contrasena_encriptada = hashlib.md5(request.json["contrasena"].encode('utf-8')).hexdigest()
             nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=contrasena_encriptada,
                                     rol=Roles.ENTRENADOR)
+
             db.session.add(nuevo_usuario)
+            usuario_entrenador = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
+            nuevo_entrenador = Entrenador(nombre=request.json["nombre"], apellidos=request.json["apellidos"],
+                                          usuario=usuario_entrenador.id)
+            db.session.add(nuevo_entrenador)
             db.session.commit()
             # token_de_acceso = create_access_token(identity=nuevo_usuario.id)
             return {"mensaje": "usuario creado exitosamente", "id": nuevo_usuario.id}
         else:
-            return "El usuario ya existe", 404
+            return {"mensaje":"El usuario ya existe"}, 404
 
     def put(self, id_usuario):
         usuario = Usuario.query.get_or_404(id_usuario)
@@ -48,24 +53,6 @@ class VistaSignIn(Resource):
         db.session.delete(usuario)
         db.session.commit()
         return '', 204
-class VistaEntrenadorSingUp(Resource):
-
-    def post (self):
-        usuario = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
-
-        if usuario is None:
-            contrasena_encriptada = hashlib.md5(request.json["contrasena"].encode('utf-8')).hexdigest()
-            nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=contrasena_encriptada,rol=Roles.ENTRENADOR)
-            db.session.add(nuevo_usuario)
-            usuario_entrenador = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
-            nuevo_entrenador = Entrenador (nombre=request.json["nombre"], apellidos= request.json["apellidos"], usuario_id=usuario_entrenador.id)
-            db.session.add(nuevo_entrenador)
-            db.session.commit()
-
-            return {"mensaje": "usuario entrenador creado exitosamente", "id": nuevo_usuario.id}
-        else:
-            return {"mensaje": "Elija un nombre de usuario diferente"}, 404
-
 class VistaLogIn(Resource):
 
     def post(self):
