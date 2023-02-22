@@ -53,4 +53,12 @@ export class RutinaCrearComponent implements OnInit {
     this.routerPath.navigate(['/rutina']);
   }
 
+  get nombre() {
+    return this.rutinaForm.get('nombre');
+  }
+
+  get descripcion() {
+    return this.rutinaForm.get('descripcion');
+  }
+
 }
