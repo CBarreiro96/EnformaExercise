@@ -29,8 +29,8 @@ export class UsuarioRegistroComponent implements OnInit {
       usuario: ["", [Validators.required, Validators.maxLength(50)]],
       password: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(8)]],
       confirmPassword: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(8)]],
-      nombre: ["", [Validators.required, Validators.maxLength(60), Validators.minLength(3)]],
-      apellido: ["", [Validators.required, Validators.maxLength(60), Validators.minLength(3)]]
+      nombre: ["", [Validators.required, Validators.maxLength(30), Validators.minLength(3)]],
+      apellido: ["", [Validators.required, Validators.maxLength(30), Validators.minLength(3)]]
     });
   }
 
