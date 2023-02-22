@@ -58,7 +58,7 @@ describe('RutinaCrearComponent', () => {
   it('form valid when is full', () => {
     // Se completan los campos del formulario con datos aleatorios utilizando la librería Faker.
     component.nombre?.setValue(faker.datatype.string(50));
-    component.descripcion?.setValue(faker.datatype.string(50));
+    component.descripcion?.setValue(faker.datatype.string(100));
   
     // Se verifica que el formulario sea válido.
     expect(component.rutinaForm.valid).toBeTruthy()
