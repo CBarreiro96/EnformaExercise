@@ -52,7 +52,7 @@ class testEntrenador(unittest.TestCase):
             "usuario": nombre_usuario,
             "contrasena": contrasena,
             "nombre": nombre_entrenador,
-            "apellidos": apllidos_entrenador
+            "apellido": apllidos_entrenador
         }
 
         entrenador_signup = self.entrenador.post("/signin",
