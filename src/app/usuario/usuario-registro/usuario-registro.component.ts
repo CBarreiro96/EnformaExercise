@@ -44,6 +44,9 @@ export class UsuarioRegistroComponent implements OnInit {
       this.usuarioForm.get('apellido')?.value
       )
       .subscribe(res => { // Se redirige al usuario a la página principal si el registro fue exitoso
+        this.toastrService.success('Registro exitoso', 'Información', {
+          closeButton: true,
+        });
         this.router.navigate([`/`])
       },
         error => { // Se muestra un mensaje de error si el registro falló
