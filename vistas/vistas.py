@@ -34,7 +34,7 @@ class VistaSignIn(Resource):
 
             db.session.add(nuevo_usuario)
             usuario_entrenador = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
-            nuevo_entrenador = Entrenador(nombre=request.json["nombre"], apellidos=request.json["apellidos"],
+            nuevo_entrenador = Entrenador(nombre=request.json["nombre"], apellidos=request.json["apellido"],
                                           usuario=usuario_entrenador.id)
             db.session.add(nuevo_entrenador)
             db.session.commit()
