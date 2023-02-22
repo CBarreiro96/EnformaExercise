@@ -29,11 +29,14 @@
           >
             Contenido requerido
           </div>
+          <div class="alert alert-danger my-3" *ngIf="rutinaForm.get('nombre')?.hasError('maxlength')">
+            El nombre no debe exceder de los 50 carácteres
+          </div>
           <div
             class="alert alert-danger alert-dismissible fade show"
             *ngIf="rutinaForm.get('nombre')!.hasError('minlength')"
           >
-            El contenido es muy corto, debe tener al menos dos caracteres.
+            El contenido es muy corto, debe tener al menos tres caracteres.
           </div>
         </div>
 
@@ -55,6 +58,9 @@
             "
           >
             Contenido requerido
+          </div>
+          <div class="alert alert-danger my-3" *ngIf="rutinaForm.get('descripcion')?.hasError('maxlength')">
+            La descripcion no debe exceder de los 100 carácteres
           </div>
           <div
             class="alert alert-danger alert-dismissible fade show"
