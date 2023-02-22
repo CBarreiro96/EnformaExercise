@@ -49,8 +49,8 @@ describe('UsuarioRegistroComponent', () => {
     component.usuario?.setValue(faker.datatype.string(50));
     component.password?.setValue(faker.datatype.string(50));
     component.confirmpassword?.setValue(faker.datatype.string(50))
-    component.nombre?.setValue(faker.datatype.string(60));
-    component.apellido?.setValue(faker.datatype.string(60));
+    component.nombre?.setValue(faker.datatype.string(30));
+    component.apellido?.setValue(faker.datatype.string(30));
     
     // Se verifica que el formulario sea válido.
     expect(component.usuarioForm.valid).toBeTruthy()
