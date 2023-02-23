@@ -19,8 +19,8 @@ class TestEjercicio(TestCase):
         nombre_entrenador = 'test_' + self.data_factory.name()
         apellido_entrenador='test_' + self.data_factory.name()
         contrasena_encriptada = hashlib.md5(contrasena.encode('utf-8')).hexdigest()
-        self.entrenadores_creados = []
-        self.usuarios_creados = []
+
+        self.usuario_creado
         self.rutinas_creadas =[]
         self.entrenador_id=-1
         # Se crea el usuario para identificarse en la aplicación
@@ -47,9 +47,9 @@ class TestEjercicio(TestCase):
         db.session.add(entrenador)
         db.session.commit()
         usuario = Usuario.query.filter(Usuario.usuario == nombre_usuario).first()
-        self.usuarios_creados.append(usuario)
+        self.usuario_creado=usuario
         entrenador = Entrenador.query.filter(Entrenador.nombre == nombre_entrenador).first()
-        self.entrenadores_creados.append(entrenador)
+
         self.entrenador_id = entrenador.id;
 
     def test_crear_rutina (self):
@@ -78,3 +78,10 @@ class TestEjercicio(TestCase):
             rutina_creada = Rutina.query.get(rutina_creada.id)
             db.session.delete(rutina_creada)
             db.session.commit()
+        entrenador = Entrenador.query.filter(Entrenador.id== self.entrenador_id).first()
+        db.session.delete(entrenador)
+
+        usuario =Usuario.query.filter(Usuario.id == self.usuario_id).first()
+        db.session.delete(usuario)
+
+        db.session.commit()
