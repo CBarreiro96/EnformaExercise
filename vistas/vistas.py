@@ -268,10 +268,10 @@ class VistaEntrenadores(Resource):
         return [entrenador_schema.dump(entrenador) for entrenador in entrenadores_ordenados]
 class VistaRutina(Resource):
     @jwt_required()
-    def post (self,username):
-        usuario = Usuario.query.filter(Usuario.usuario == username).first()
-        entrenador = Entrenador.query.filter(Entrenador.usuario == usuario.id).first()
-        if usuario is None:
+    def post (self,id_usuario):
+
+        entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
+        if entrenador is None:
             return {"message:":"el entrenador no existe"},404
 
         rutina = Rutina (nombre=request.json["nombre"],descripcion=request.json["descripcion"],entrenador = entrenador.id )

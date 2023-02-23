@@ -36,7 +36,7 @@ api.add_resource(VistaEntrenamientos, '/entrenamientos/<int:id_persona>')
 api.add_resource(VistaEntrenamiento, '/entrenamiento/<int:id_entrenamiento>')
 api.add_resource(VistaReporte, '/persona/<int:id_persona>/reporte')
 api.add_resource(VistaEntrenadores, '/entrenadores')
-api.add_resource(VistaRutina, '/rutina/<username>')
+api.add_resource(VistaRutina, '/rutina/<int:id_usuario>')
 
 jwt = JWTManager(app)
 
