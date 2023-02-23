@@ -20,7 +20,7 @@ class TestEjercicio(TestCase):
         apellido_entrenador='test_' + self.data_factory.name()
         contrasena_encriptada = hashlib.md5(contrasena.encode('utf-8')).hexdigest()
 
-        self.usuario_creado
+
         self.rutinas_creadas =[]
         self.entrenador_id=-1
         # Se crea el usuario para identificarse en la aplicación
@@ -60,7 +60,7 @@ class TestEjercicio(TestCase):
             "nombre": nombre,
             "descripcion": descripcion
         }
-        endpoint_ejercicios = "/rutina/" + str(self.entrenador_id)
+        endpoint_ejercicios = "/rutina/" + str(self.usuario_id)
         headers = {'Content-Type': 'application/json', "Authorization": "Bearer {}".format(self.token)}
         resultado_nuevo_nueva = self.client.post(endpoint_ejercicios,
                                                      data=json.dumps(rutina),
