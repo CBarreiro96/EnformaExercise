@@ -1,0 +1,45 @@
+<app-encabezado></app-encabezado>
+<div class="row">
+  <div class="col col-4">
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+        Entrenadores
+        <button type="button" class="btn btn-warning">
+          <i class="bi bi-plus-circle"></i>
+        </button>
+      </div>
+      <table class="table" border="1">
+        <tbody>
+          <tr
+            *ngFor="
+              let entrenador of entrenadores
+                | slice : (page - 1) * pageSize : page * pageSize
+            "
+          >
+            <td>{{ entrenador.nombre }} {{ entrenador.apellido }}</td>
+            <td>
+              <button type="button" class="btn btn-warning">
+                <i class="bi bi-eye"></i></button
+              >&nbsp;
+              <button type="button" class="btn btn-primary">
+                <i class="bi bi-pencil"></i></button
+              >&nbsp;
+              <button type="button" class="btn btn-danger">
+                <i class="bi bi-trash"></i></button
+              >&nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ngb-pagination
+        class="d-flex justify-content-center"
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="entrenadores.length"
+        [boundaryLinks]="true"
+        [maxSize]="3"
+        [rotate]="true"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

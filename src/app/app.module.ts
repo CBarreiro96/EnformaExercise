@@ -9,14 +9,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuarioModule } from './usuario/usuario.module';
 import { PersonaModule } from './persona/persona.module';
-import { EjercicioModule} from './ejercicio/ejercicio.module';
+import { EjercicioModule } from './ejercicio/ejercicio.module';
 import { EntrenamientoModule } from './entrenamiento/entrenamiento.module';
+import { EntrenadorModule } from './entrenador/entrenador.module';
 import { RutinaModule } from './rutina/rutina.module';
 
 @NgModule({
-  declarations: [	
-    AppComponent
-   ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +26,7 @@ import { RutinaModule } from './rutina/rutina.module';
     PersonaModule,
     EjercicioModule,
     EntrenamientoModule,
+    EntrenadorModule,
     RutinaModule,
     ToastrModule.forRoot({
       timeOut: 7000,
@@ -34,9 +34,9 @@ import { RutinaModule } from './rutina/rutina.module';
       preventDuplicates: true,
     }),
     BrowserAnimationsModule,
-    RutinaModule
+    RutinaModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
