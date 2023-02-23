@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Usuario } from 'src/app/usuario/usuario';
 import { Rutina } from '../rutina';
 import { RutinaService } from '../rutina.service';
 
@@ -12,7 +13,7 @@ import { RutinaService } from '../rutina.service';
 })
 export class RutinaCrearComponent implements OnInit {
 
-  rutinaForm: FormGroup;
+   rutinaForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +32,7 @@ export class RutinaCrearComponent implements OnInit {
   // Este método se encarga de llamar al servicio de creación de rutina con los datos del formulario y maneja la respuesta
   // mostrando un mensaje de éxito en caso de éxito y mensajes de error específicos en caso de errores conocidos o genéricos
   crearRutina(rutina: Rutina): void {
-    this.rutinaService.crearRutina(rutina).subscribe((rutina) => {
+    this.rutinaService.crearRutina(rutina, parseInt(sessionStorage.getItem('idUsuario'))).subscribe((rutina) => {
     this.toastr.success("Confirmation", "Rutina creada")
     this.rutinaForm.reset();
     this.routerPath.navigate(['/rutina']);
