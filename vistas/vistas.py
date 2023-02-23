@@ -11,8 +11,8 @@ from modelos import \
     Ejercicio, EjercicioSchema, \
     Persona, PersonaSchema, \
     Entrenamiento, EntrenamientoSchema, \
-    Usuario, UsuarioSchema, Entrenador, \
-    ReporteGeneralSchema, ReporteDetalladoSchema, Roles, EntrenadorSchema
+    Usuario, UsuarioSchema, Entrenador, Rutina, \
+    ReporteGeneralSchema, ReporteDetalladoSchema, Roles, EntrenadorSchema, RutinaSchema
 
 ejercicio_schema = EjercicioSchema()
 persona_schema = PersonaSchema()
@@ -21,6 +21,7 @@ usuario_schema = UsuarioSchema()
 reporte_general_schema = ReporteGeneralSchema()
 reporte_detallado_schema = ReporteDetalladoSchema()
 entrenador_schema = EntrenadorSchema()
+rutina_schema = RutinaSchema()
 
 
 class VistaSignIn(Resource):
@@ -265,3 +266,15 @@ class VistaEntrenadores(Resource):
         entrenadores = Entrenador.query.all()
         entrenadores_ordenados = sorted(entrenadores, key=lambda entrenador: entrenador.nombre.lower())
         return [entrenador_schema.dump(entrenador) for entrenador in entrenadores_ordenados]
+class VistaRutina(Resource):
+    @jwt_required()
+    def post (self,id_usuario):
+
+        entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
+        if entrenador is None:
+            return {"message:":"el entrenador no existe"},404
+
+        rutina = Rutina (nombre=request.json["nombre"],descripcion=request.json["descripcion"],entrenador = entrenador.id )
+        db.session.add(rutina)
+        db.session.commit()
+        return rutina_schema.dump(rutina);
