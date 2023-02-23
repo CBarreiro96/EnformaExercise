@@ -23,6 +23,7 @@ export class UsuarioLoginComponent implements OnInit {
     sessionStorage.setItem('decodedToken', '');
     sessionStorage.setItem('token', '');
     sessionStorage.setItem('idUsuario', '');
+    sessionStorage.setItem('rolUsuario', '');
   }
 
   loginUsuario(usuario: string, contrasena: string) {
@@ -40,7 +41,7 @@ export class UsuarioLoginComponent implements OnInit {
         this.toastrService.success('Login ok', 'Información', {
           closeButton: true,
         });
-        if (res.rol == 'Administrador') this.router.navigate([`/persona`]);
+        if (res.rol == 'Administrador') this.router.navigate([`/entrenador`]);
         else if (res.rol == 'Entrenador') this.router.navigate([`/persona`]);
       },
       (error) => {
