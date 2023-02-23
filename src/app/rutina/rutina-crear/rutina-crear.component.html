@@ -1,0 +1,80 @@
+<app-encabezado></app-encabezado>
+<div class="container mt-4 sizeBody">
+  <h3>
+    Rutina nueva
+  </h3>
+
+  <form
+    [formGroup]="rutinaForm"
+    (ngSubmit)="!rutinaForm.invalid && crearRutina(rutinaForm.value)"
+  >
+    <div class="row">
+      <div class="col">
+        <!--Nombre-->
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="nombre">Nombre</label>
+          <input
+            novalidate
+            id="nombre"
+            class="form-control"
+            formControlName="nombre"
+            placeholder="Nombre"
+          />
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            *ngIf="
+              rutinaForm.get('nombre')!.hasError('required') &&
+              rutinaForm.get('nombre')!.touched
+            "
+          >
+            Contenido requerido
+          </div>
+          <div class="alert alert-danger my-3" *ngIf="rutinaForm.get('nombre')?.hasError('maxlength')">
+            El nombre no debe exceder de los 50 carácteres
+          </div>
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            *ngIf="rutinaForm.get('nombre')!.hasError('minlength')"
+          >
+            El contenido es muy corto, debe tener al menos tres caracteres.
+          </div>
+        </div>
+
+        <!--Descripcion-->
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="descripcion">Descripcion</label>
+          <input
+            novalidate
+            id="descripcion"
+            class="form-control"
+            formControlName="descripcion"
+            placeholder="descripcion"
+          />
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            *ngIf="
+              rutinaForm.get('descripcion')!.hasError('required') &&
+              rutinaForm.get('descripcion')!.touched
+            "
+          >
+            Contenido requerido
+          </div>
+          <div class="alert alert-danger my-3" *ngIf="rutinaForm.get('descripcion')?.hasError('maxlength')">
+            La descripcion no debe exceder de los 100 carácteres
+          </div>
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            *ngIf="rutinaForm.get('descripcion')!.hasError('minlength')"
+          >
+            El contenido es muy corto, debe tener al menos 10 caracteres.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-2">
+      <button type="submit" class="btn btn-primary mt-5 mx-3" [disabled]="!rutinaForm.valid">Crear</button>
+      <button type="button" class="btn btn-danger ml-3 mt-5 mx-3" (click)="cancelarRutina()">Cancelar</button>
+    </div>
+  </form>
+</div>

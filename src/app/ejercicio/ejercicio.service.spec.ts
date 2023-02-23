@@ -1,12 +1,13 @@
 /* tslint:disable:no-unused-variable */
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { EjercicioService } from './ejercicio.service';
 
 describe('Service: Ejercicio', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [EjercicioService]
+      imports: [HttpClientTestingModule],
+      providers: [EjercicioService],
     });
   });
 
