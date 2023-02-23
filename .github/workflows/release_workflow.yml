@@ -19,11 +19,6 @@ jobs:
       runs-on: ubuntu-latest
       needs: Crear-release
       steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Configuración de entorno
-        if: github.ref == 'refs/heads/release'
-      - name: correr pruebas
       - name: Mezcla release -> main
         uses: tukasz/direct-merge-action@master
         with:
