@@ -4,9 +4,7 @@ export class Entrenador {
   constructor(
     public id: number,
     public nombre: string,
-    public apellido: string,
-    public direccion: string,
-    public telefono: string,
+    public apellidos: string,
     public personas: Array<Persona>,
     public rutinas: Array<Rutina>
   ) {}

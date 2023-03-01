@@ -44,8 +44,6 @@ describe('EntrenadorListaComponent', () => {
           faker.datatype.number(),
           faker.name.firstName(),
           faker.name.lastName(),
-          faker.address.direction(),
-          faker.phone.number(),
           [],
           []
         )
@@ -67,8 +65,6 @@ describe('EntrenadorListaComponent', () => {
         faker.datatype.number(),
         faker.name.firstName(),
         faker.name.lastName(),
-        faker.address.direction(),
-        faker.phone.number(),
         [],
         []
       ),
