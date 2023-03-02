@@ -27,4 +27,11 @@ export class RutinaService {
     return this.http.post<Rutina>(`${this.apiUrl}/rutina/${idUsuario}`, rutina, { headers: headers });
   }
 
+  darRutinas ():Observable<Rutina[]>{
+    const idUsuario = sessionStorage.getItem('idUsuario');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+    });
+    return this.http.get<Rutina[]>(`${this.apiUrl}/rutinas/${idUsuario}`,  { headers: headers });
+  }
 }

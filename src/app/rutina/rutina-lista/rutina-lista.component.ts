@@ -10,7 +10,7 @@ import { RutinaService } from '../rutina.service';
   styleUrls: ['./rutina-lista.component.css']
 })
 export class RutinaListaComponent implements OnInit {
-  
+
   rutinas:Array<Rutina> = []
   elegida: Boolean = false
   rutinaElegida: Rutina
@@ -35,10 +35,13 @@ export class RutinaListaComponent implements OnInit {
 
   }
   rutinaEliminar(idRutina: number): void {
-    
+
   }
 
   ngOnInit() {
+    this.rutinaService.darRutinas().subscribe((rutinas:Rutina[])=>{
+      this.rutinas = rutinas;
+    });
   }
 
 }

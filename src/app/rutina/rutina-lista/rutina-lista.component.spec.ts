@@ -20,7 +20,7 @@ describe('RutinaListaComponent', () => {
         HttpClientModule,
         RouterTestingModule,
       ],
-      declarations: [ 
+      declarations: [
         RutinaListaComponent,
         EncabezadoComponent
       ]
@@ -37,4 +37,11 @@ describe('RutinaListaComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+  it('should display the list', () => {
+    const list = fixture.nativeElement.querySelector('ul');
+    expect(list).toBeTruthy();
+  });
+
 });

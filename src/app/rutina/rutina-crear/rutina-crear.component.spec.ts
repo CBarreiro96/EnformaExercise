@@ -25,7 +25,7 @@ describe('RutinaCrearComponent', () => {
         RouterTestingModule,
         FormsModule,
       ],
-      declarations: [ 
+      declarations: [
         RutinaCrearComponent,
         EncabezadoComponent
       ]
@@ -44,22 +44,22 @@ describe('RutinaCrearComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   // La segunda prueba verifica que los controles del formulario sean inválidos cuando están vacíos.
-  
+
   it('form and controls invalid when empty', () => {
     expect(component.rutinaForm.valid).toBeFalsy();
     expect(component.nombre?.valid).toBeFalsy();
     expect(component.descripcion?.valid).toBeFalsy();
   });
-  
+
   // La tercera prueba verifica que el formulario sea válido cuando se ha completado con datos.
-  
+
   it('form valid when is full', () => {
     // Se completan los campos del formulario con datos aleatorios utilizando la librería Faker.
     component.nombre?.setValue(faker.datatype.string(50));
     component.descripcion?.setValue(faker.datatype.string(100));
-  
+
     // Se verifica que el formulario sea válido.
     expect(component.rutinaForm.valid).toBeTruthy()
   });
