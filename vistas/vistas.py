@@ -266,15 +266,28 @@ class VistaEntrenadores(Resource):
         entrenadores = Entrenador.query.all()
         entrenadores_ordenados = sorted(entrenadores, key=lambda entrenador: entrenador.nombre.lower())
         return [entrenador_schema.dump(entrenador) for entrenador in entrenadores_ordenados]
+
+
 class VistaRutina(Resource):
     @jwt_required()
-    def post (self,id_usuario):
+    def post(self, id_usuario):
 
         entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
         if entrenador is None:
-            return {"message:":"el entrenador no existe"},404
+            return {"message:": "el entrenador no existe"}, 404
+        elif self.validarNombreRutinaRepetido(request.json["nombre"]):
+            return {"message:": "el nombre de rutina ya existe"}, 404
+        else:
+            rutina = Rutina(nombre=request.json["nombre"], descripcion=request.json["descripcion"],
+                            entrenador=entrenador.id)
+            db.session.add(rutina)
+            db.session.commit()
+            return rutina_schema.dump(rutina);
 
-        rutina = Rutina (nombre=request.json["nombre"],descripcion=request.json["descripcion"],entrenador = entrenador.id )
-        db.session.add(rutina)
-        db.session.commit()
-        return rutina_schema.dump(rutina);
+    @staticmethod
+    def validarNombreRutinaRepetido(nombre):
+        rutina = Rutina.query.filter(Rutina.nombre == nombre).first()
+        if rutina is None:
+            return False
+        else:
+            return True
