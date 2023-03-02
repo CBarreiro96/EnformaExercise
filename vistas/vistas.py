@@ -291,3 +291,16 @@ class VistaRutina(Resource):
             return False
         else:
             return True
+
+
+class VistaRutinas(Resource):
+    @jwt_required()
+    def get(self, id_usuario):
+
+        entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
+        if entrenador is None:
+            return {"message:": "el entrenador no existe"}, 404
+        else:
+            rutinas = entrenador.rutinas
+            rutinas_ordenadas = sorted(rutinas, key=lambda rutina: rutina.nombre.lower())
+            return [rutina_schema.dump(rutina) for rutina in rutinas_ordenadas]
