@@ -288,6 +288,6 @@ class VistaRutina(Resource):
     def validarNombreRutinaRepetido(nombre):
         rutina = Rutina.query.filter(Rutina.nombre == nombre).first()
         if rutina is None:
-            return True
-        else:
             return False
+        else:
+            return True
