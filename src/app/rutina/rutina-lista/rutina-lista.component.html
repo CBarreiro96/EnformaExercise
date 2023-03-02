@@ -24,7 +24,6 @@
     <div *ngIf="elegida">
       <div class="card" style="width: 100%;">
         <div class="card-body">
-          <!-- <h5 class="card-title">{{rutinaElegida.nombre}}</h5> -->
           <p class="card-text" *ngIf="rutinaElegida">
             <app-rutina-detalle [rutinaDetalle]="rutinaElegida"></app-rutina-detalle>
             <app-ejercicio-rutina-lista [ejercicios]="ejercicios" [rutinaDetalle]="rutinaElegida"></app-ejercicio-rutina-lista> 
