@@ -11,7 +11,7 @@
           <tr *ngFor="let rutina of rutinas">
             <td>{{rutina.nombre}}</td>
             <td>
-              <button [disabled]="!rutina.ejercicio" type="button" class="btn btn-warning" (click)="elegir(rutina)"><i class="bi bi-eye"></i></button>&nbsp;
+              <button type="button" class="btn btn-warning" (click)="elegir(rutina)"><i class="bi bi-eye"></i></button>&nbsp;
               <button [disabled]="!rutina.ejercicio" type="button" class="btn btn-primary" (click)="rutinaEditar(rutina.id)"><i class="bi bi-pencil"></i></button>&nbsp;
               <button type="button" class="btn btn-danger" (click)="rutinaEliminar(rutina.id)"><i class="bi bi-trash"></i></button>&nbsp;
             </td>
@@ -19,13 +19,16 @@
         </tbody>
       </table>
     </div>
-      </div>
+  </div>  
   <div class="col col-8">
     <div *ngIf="elegida">
       <div class="card" style="width: 100%;">
         <div class="card-body">
-          <h5 class="card-title">{{rutinaElegida.nombre}}</h5>
-          <p class="text">{{rutinaElegida.descripcion}}</p>
+          <!-- <h5 class="card-title">{{rutinaElegida.nombre}}</h5> -->
+          <p class="card-text" *ngIf="rutinaElegida">
+            <app-rutina-detalle [rutinaDetalle]="rutinaElegida"></app-rutina-detalle>
+            <app-ejercicio-rutina-lista [ejercicios]="ejercicios" [rutinaDetalle]="rutinaElegida"></app-ejercicio-rutina-lista> 
+          </p>
         </div>
       </div>
     </div>

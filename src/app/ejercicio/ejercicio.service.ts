@@ -19,6 +19,14 @@ export class EjercicioService {
     return this.http.get<Ejercicio[]>(`${this.apiUrl}/ejercicios`, { headers: headers })
   }
 
+  darEjerciciosRutina(idRutina: number): Observable<Ejercicio[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+    })
+    return this.http.get<Ejercicio[]>(`${this.apiUrl}/ejercicios/${idRutina}`, { headers: headers })
+  }
+
+
   crearEjercicio(ejercicio): Observable<Ejercicio> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${sessionStorage.getItem('token')}`
