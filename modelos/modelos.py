@@ -12,6 +12,7 @@ class Ejercicio(db.Model):
     video = db.Column(db.String(512))
     calorias = db.Column(db.Numeric)
     entrenamientos = db.relationship('Entrenamiento')
+    rutina = db.Column(db.Integer, db.ForeignKey('rutina.id'))
 
 
 class Persona(db.Model):
@@ -55,7 +56,7 @@ class Rutina (db.Model):
     nombre = db.Column(db.String(50))
     descripcion = db.Column(db.String(100))
     entrenador = db.Column(db.Integer, db.ForeignKey('entrenador.id'))
-
+    ejercicios = db.relationship('Ejercicio', cascade='all, delete, delete-orphan')
 
 class Entrenamiento(db.Model):
     id = db.Column(db.Integer, primary_key=True)

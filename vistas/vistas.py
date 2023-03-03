@@ -291,3 +291,9 @@ class VistaRutina(Resource):
             return False
         else:
             return True
+class VistaEjercicioRutina (Resource):
+    def put(self, id_rutina, id_ejercicio):
+        rutina = Rutina.query.get_or_404(id_rutina)
+        rutina.ejercicios = Ejercicio.rutina.query.get_or_404 (id_ejercicio)
+        db.session.commit()
+        return '', 204
