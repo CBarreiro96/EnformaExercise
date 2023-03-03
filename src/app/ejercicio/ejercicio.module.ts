@@ -6,6 +6,7 @@ import { EncabezadoAppModule } from '../encabezado-app/encabezado-app.module';
 import { EjercicioCrearComponent } from './ejercicio-crear/ejercicio-crear.component';
 import { EjercicioEditarComponent } from './ejercicio-editar/ejercicio-editar.component';
 import { EjercicioListaComponent } from './ejercicio-lista/ejercicio-lista.component';
+import { EjercicioRutinaListaComponent } from './ejercicio-rutina-lista/ejercicio-rutina-lista.component';
 
 @NgModule({
   imports: [
@@ -18,10 +19,12 @@ import { EjercicioListaComponent } from './ejercicio-lista/ejercicio-lista.compo
     EjercicioListaComponent,
     EjercicioCrearComponent,
     EjercicioEditarComponent,
-    RouterModule],
+    RouterModule
+  ],
   declarations: [
     EjercicioListaComponent,
     EjercicioCrearComponent,
-    EjercicioEditarComponent]
+    EjercicioEditarComponent,
+  ]
 })
 export class EjercicioModule { }
