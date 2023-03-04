@@ -6,8 +6,12 @@
       <div class="card-header">
         Rutinas <button type="button" class="btn btn-warning" (click)="rutinaCrear()"><i class="bi bi-plus-circle"></i></button>
       </div>
-      <table class="table" border="1">
+      <table class="table" border="1" aria-describedby="Tabla lista rutinas">
         <tbody>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Accion</th>
+          </tr>
           <tr *ngFor="let rutina of rutinas">
             <td>{{rutina.nombre}}</td>
             <td>
@@ -19,14 +23,14 @@
         </tbody>
       </table>
     </div>
-  </div>  
+  </div>
   <div class="col col-8">
     <div *ngIf="elegida">
       <div class="card" style="width: 100%;">
         <div class="card-body">
           <p class="card-text" *ngIf="rutinaElegida">
             <app-rutina-detalle [rutinaDetalle]="rutinaElegida"></app-rutina-detalle>
-            <app-ejercicio-rutina-lista [ejercicios]="ejercicios" [rutinaDetalle]="rutinaElegida"></app-ejercicio-rutina-lista> 
+            <app-ejercicio-rutina-lista [ejercicios]="ejercicios" [rutinaDetalle]="rutinaElegida"></app-ejercicio-rutina-lista>
           </p>
         </div>
       </div>
