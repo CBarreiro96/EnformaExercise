@@ -1,7 +1,6 @@
 from flask import request
 from flask_jwt_extended import jwt_required, create_access_token
 from flask_restful import Resource
-from sqlalchemy.exc import IntegrityError
 from datetime import datetime
 from .utilidad_reporte import UtilidadReporte
 import hashlib
@@ -297,3 +296,16 @@ class VistaEjercicioRutina (Resource):
         rutina.ejercicios = Ejercicio.rutina.query.get_or_404 (id_ejercicio)
         db.session.commit()
         return '', 204
+
+
+class VistaRutinas(Resource):
+    @jwt_required()
+    def get(self, id_usuario):
+
+        entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
+        if entrenador is None:
+            return {"message:": "el entrenador no existe"}, 404
+        else:
+            rutinas = entrenador.rutinas
+            rutinas_ordenadas = sorted(rutinas, key=lambda rutina: rutina.nombre.lower())
+            return [rutina_schema.dump(rutina) for rutina in rutinas_ordenadas]
