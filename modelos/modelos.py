@@ -52,7 +52,9 @@ class Entrenador(db.Model):
     usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
     personas = db.relationship('Persona')
     rutinas = db.relationship('Rutina', cascade=DELETE_ORPHAN)
-class Rutina (db.Model):
+
+
+class Rutina(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50))
     descripcion = db.Column(db.String(100))
@@ -138,14 +140,18 @@ class EntrenadorSchema(SQLAlchemyAutoSchema):
     id = fields.String()
     usuario = fields.String()
 
+
 class RutinaSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Rutina
         include_relationships = True
         include_fk = True
         load_instance = True
+
     id = fields.String()
     entrenador = fields.String()
+
+
 class Roles:
     ADMIN = "Administrador"
     CLIENTE = "Cliente"
