@@ -2,6 +2,8 @@ from flask_sqlalchemy import SQLAlchemy
 from marshmallow import fields, Schema
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
+DELETE_ORPHAN = 'all, delete, delete-orphan'
+
 db = SQLAlchemy()
 
 
@@ -29,7 +31,7 @@ class Persona(db.Model):
     entrenando = db.Column(db.Boolean, default=True)
     razon = db.Column(db.String(512))
     terminado = db.Column(db.DateTime)
-    entrenamientos = db.relationship('Entrenamiento', cascade='all, delete, delete-orphan')
+    entrenamientos = db.relationship('Entrenamiento', cascade=DELETE_ORPHAN)
     usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
     entrenador = db.Column(db.Integer, db.ForeignKey('entrenador.id'))
 
@@ -38,8 +40,8 @@ class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usuario = db.Column(db.String(50))
     contrasena = db.Column(db.String(50))
-    personas = db.relationship('Persona', cascade='all, delete, delete-orphan')
-    entrenadores = db.relationship('Entrenador', cascade='all, delete, delete-orphan')
+    personas = db.relationship('Persona', cascade=DELETE_ORPHAN)
+    entrenadores = db.relationship('Entrenador', cascade=DELETE_ORPHAN)
     rol = db.Column(db.String(20))
 
 
@@ -49,8 +51,10 @@ class Entrenador(db.Model):
     apellidos = db.Column(db.String(60))
     usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
     personas = db.relationship('Persona')
-    rutinas = db.relationship('Rutina', cascade='all, delete, delete-orphan')
-class Rutina (db.Model):
+    rutinas = db.relationship('Rutina', cascade=DELETE_ORPHAN)
+
+
+class Rutina(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50))
     descripcion = db.Column(db.String(100))
@@ -136,14 +140,18 @@ class EntrenadorSchema(SQLAlchemyAutoSchema):
     id = fields.String()
     usuario = fields.String()
 
+
 class RutinaSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Rutina
         include_relationships = True
         include_fk = True
         load_instance = True
+
     id = fields.String()
     entrenador = fields.String()
+
+
 class Roles:
     ADMIN = "Administrador"
     CLIENTE = "Cliente"
