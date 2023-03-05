@@ -4,6 +4,12 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { PersonaRegistroComponent } from './persona-registro.component';
+import {PersonaService} from "../persona.service";
+import {ToastrModule, ToastrService} from "ngx-toastr";
+import {RouterTestingModule} from "@angular/router/testing";
+import {ReactiveFormsModule} from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
+import {catchError, of, throwError} from "rxjs";
 
 describe('PersonaRegistroComponent', () => {
   let component: PersonaRegistroComponent;
@@ -11,7 +17,13 @@ describe('PersonaRegistroComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonaRegistroComponent ]
+      declarations: [ PersonaRegistroComponent ],
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule,
+        ToastrModule.forRoot(),
+        HttpClientModule
+      ]
     })
     .compileComponents();
   }));
@@ -25,4 +37,5 @@ describe('PersonaRegistroComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

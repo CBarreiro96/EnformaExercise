@@ -1,24 +1,16 @@
-<div class="container align-items-center">
-  <div class="row align-items-center">
-    <div class="col-xs-10 col-lg-5 card px-2 ">
-      <div class="card-body text-center">
-        <h2 class="my-2">En Forma</h2>
-        <p class="my-2">Para estar bien de salud</p>
-      </div>
-    </div>
-
-    <div class="col-xs-10 col-lg-5 container">
+<div class="container d-flex justify-content-center">
+  <div class="row  d-flex justify-content-center">
+    <div class="col-xs-5 col-lg-8 container">
       <div class="row">
-
-        <div class="my-2 row">
-          <h1 class="text-center">Registro</h1>
+        <div class="my-5 row">
+          <h1 class="text-center">Registro Persona</h1>
         </div>
 
-        <form [formGroup]="this.personaForm" (ngSubmit)="registrarUsuario()">
+        <form [formGroup]="this.personaForm" (ngSubmit)="registrarPersona()">
 
           <div class="form-group">
             <div class="mb-3 row">
-              <label for="usuario" class="col-lg-3 col-form-label">Usuario</label>
+              <label for="persona" class="col-lg-3 col-form-label">Usuario</label>
               <div class="col-lg-9  ">
                 <input formControlName="usuario" type="text" class="form-control" placeholder="Usuario">
               </div>
@@ -52,7 +44,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group mb-5">
             <div class="mb-3 row">
               <label for="confirmPassword" class="col-lg-3 col-form-label">Confirmar contraseña</label>
               <div class="col-lg-9">
@@ -76,13 +68,21 @@
           </div>
 
           <div class="col-12 text-center mt-3">
-            <button type="submit" class="btn btn-warning col-8"
-              [disabled]="!personaForm.valid || personaForm.get('confirmPassword')?.value !== personaForm.get('password')?.value">Registrarse</button>
+            <button type="submit"
+                    class="btn btn-primary me-3 btn-lg buttonRegistro"
+                    [disabled]="!personaForm.valid || personaForm.get('confirmPassword')?.value !== personaForm.get('password')?.value">
+              Actualizar
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger ml-3 btn-lg buttonRegistro"
+              (click)="cancelarPersonaRegistro()">
+              Cancelar
+            </button>
           </div>
 
         </form>
 
       </div>
-    </div>
   </div>
 </div>

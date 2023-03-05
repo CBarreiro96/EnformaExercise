@@ -12,14 +12,18 @@ import { PersonaService } from '../persona.service';
 export class PersonaRegistroComponent implements OnInit {
 
   personaForm!: FormGroup;
+
+  // Se inyectan los servicios necesarios en el constructor del componente
   constructor(
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
+    private routerPath: Router,
     private router: Router,
     private personaService: PersonaService
   ) { }
 
   ngOnInit() {
+    // Se define el formulario y sus campos con las validaciones correspondientes
     this.personaForm = this.formBuilder.group({
       usuario: ["", [Validators.required, Validators.maxLength(50)]],
       password: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(8)]],
@@ -27,23 +31,24 @@ export class PersonaRegistroComponent implements OnInit {
     });
   }
 
-  registraPersona() {
-    // Llamada al método de registro del servicio UsuarioService, pasando los valores actuales del formulario
+  registrarPersona() {
+    //Se llama al método de registro del servicio personaService, pasando los valores actuales del formulario
     this.personaService.registro(
       this.personaForm.get('usuario')?.value,
       this.personaForm.get('password')?.value,
       )
-      .subscribe(res => { // Se redirige al usuario a la página principal si el registro fue exitoso
+      .subscribe(res => { // Si el registro fue exitoso, se muestra un mensaje y se redirige a la lista de personas
         this.toastrService.success('Registro exitoso', 'Información', {
           closeButton: true,
         });
         this.router.navigate([`/`])
       },
-        error => { // Se muestra un mensaje de error si el registro falló
+        error => { // Si el registro falló, se muestra un mensaje de error
           this.toastrService.error("Error en el registro. Verifique que el usuario no se encuentre ya registrado", "Error", {closeButton: true});
       })
     }
 
+  // Se definen getters para obtener los campos del formulario
     get usuario() {
       return this.personaForm.get('usuario');
     }
@@ -54,6 +59,11 @@ export class PersonaRegistroComponent implements OnInit {
     get confirmpassword() {
       return this.personaForm.get('confirmPassword');
     }
+  cancelarPersonaRegistro(): void {
+    // Se reinicia el formulario y se redirige a la página de registro de personas
+    this.personaForm.reset();
+    this.routerPath.navigate(['/persona']);
+  }
 
 
 
