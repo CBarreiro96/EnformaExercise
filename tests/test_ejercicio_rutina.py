@@ -1,3 +1,4 @@
+import json
 from unittest import TestCase
 
 from faker import Faker
@@ -40,7 +41,20 @@ class TestRutina_ejercicio(TestCase):
         self.id_ejercicio = id_ejercicio
 
     def test_agregar_ejercicio_rutina(self):
-        
-        self.assertEqual(True, False)  # add assertion here
+
+        rutina_ejercicio = {
+            "id_rutina": self.id_rutina,
+            "id_ejercicio": self.id_ejercicio
+        }
+        headers = {'Content-Type': 'application/json'}
+
+        result_ejercicio_rutina = app.test_client.put(
+            "/rutina-ejercicio",
+            data = json.dumps(rutina_ejercicio),
+            headers = headers
+        )
+        datos_respuesta = json.load(result_ejercicio_rutina.getData())
+
+        self.assertEqual(datos_respuesta.status_code, 204)
 
 
