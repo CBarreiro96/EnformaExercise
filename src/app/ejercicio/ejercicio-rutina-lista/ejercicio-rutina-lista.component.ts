@@ -4,11 +4,8 @@ import { Ejercicio } from '../ejercicio';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { EjercicioService } from '../ejercicio.service';
-import {
-  ModalDismissReasons,
-  NgbDatepickerModule,
-  NgbModal,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RutinaEjercicioService } from 'src/app/rutina/rutina-ejercicio.service';
 
 @Component({
   selector: 'app-ejercicio-rutina-lista',
@@ -23,6 +20,7 @@ export class EjercicioRutinaListaComponent implements OnInit {
 
   constructor(
     private ejercicioService: EjercicioService,
+    private rutinaEjercicioService: RutinaEjercicioService,
     private formBuilder: FormBuilder,
     private modal: NgbModal,
     private toastrService: ToastrService
@@ -43,15 +41,23 @@ export class EjercicioRutinaListaComponent implements OnInit {
       .result.then(
         (result) => {
           let ejercicioId = this.ejercicioForm.get('ejercicio')?.value;
-          //TODO: llamar servicio para registrar ejercicio
-          // El servicio debe validar que no se repita el ejercicio
-          this.toastrService.success(
-            'Ejercicio registrado con exito',
-            'Información',
-            {
-              closeButton: true,
-            }
-          );
+          this.rutinaEjercicioService
+            .agregarEjercicio(this.rutinaDetalle.id, ejercicioId)
+            .subscribe(
+              (response) => {
+                this.toastrService.success(
+                  'Ejercicio registrado con éxito',
+                  'Información',
+                  {
+                    closeButton: true,
+                  }
+                );
+              },
+              (error) => {
+                this.toastrService.error('Ocurrió un error', 'Información');
+              }
+            );
+
           this.ejercicioForm.reset({ ejercicio: '' });
         },
         (reason) => {
