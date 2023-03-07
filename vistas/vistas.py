@@ -295,9 +295,10 @@ class VistaEjercicioRutina (Resource):
         id_rutina = request.json["id_rutina"]
         id_ejercicio = request.json["id_ejercicio"]
         rutina = Rutina.query.get_or_404(id_rutina)
-        rutina.ejercicios = Ejercicio.rutina.query.get_or_404 (id_ejercicio)
+        ejercicio = Ejercicio.query.get_or_404 (id_ejercicio)
+        rutina.ejercicios.append(ejercicio)
         db.session.commit()
-        return '', 204
+        return rutina_schema.dump(rutina), 201
 
 
 class VistaRutinas(Resource):

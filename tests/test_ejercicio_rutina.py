@@ -48,13 +48,13 @@ class TestRutina_ejercicio(TestCase):
         }
         headers = {'Content-Type': 'application/json'}
 
-        result_ejercicio_rutina = app.test_client.put(
+        result_ejercicio_rutina = self.client.put(
             "/rutina-ejercicio",
             data = json.dumps(rutina_ejercicio),
             headers = headers
         )
         datos_respuesta = json.load(result_ejercicio_rutina.getData())
 
-        self.assertEqual(datos_respuesta.status_code, 204)
+        self.assertEqual(datos_respuesta.status_code, 201)
 
 
