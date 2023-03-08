@@ -33,7 +33,7 @@ export class PersonaRegistroComponent implements OnInit {
 
   registrarPersona() {
     //Se llama al método de registro del servicio personaService, pasando los valores actuales del formulario
-    this.personaService.registro(
+    this.personaService.registroPersona(
       this.personaForm.get('usuario')?.value,
       this.personaForm.get('password')?.value,
       )
