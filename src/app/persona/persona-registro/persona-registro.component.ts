@@ -41,7 +41,7 @@ export class PersonaRegistroComponent implements OnInit {
         this.toastrService.success('Registro exitoso', 'Información', {
           closeButton: true,
         });
-        this.router.navigate([`/`])
+        this.router.navigate([`/persona`])
       },
         error => { // Si el registro falló, se muestra un mensaje de error
           this.toastrService.error("Error en el registro. Verifique que el usuario no se encuentre ya registrado", "Error", {closeButton: true});
