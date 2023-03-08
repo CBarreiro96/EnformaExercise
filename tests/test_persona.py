@@ -22,14 +22,14 @@ class testEntrenador(unittest.TestCase):
 
         db.session.commit()
 
-    def test_crear_credenciales_cliente(self):
+    def test_crear_credenciales_persona(self):
         nombre_usuario = 'test_' + self.data_factory.name()
         contrasena = 'T1$' + self.data_factory.word()
         usuario = {
             "usuario": nombre_usuario,
             "contrasena": contrasena
         }
-        cliente_signup = self.cliente.post("/signin/cliente",
+        cliente_signup = self.cliente.post("/signin/persona",
                                            data=json.dumps(usuario),
                                            headers={'Content-Type': 'application/json', 'status_code': 200})
         respuesta_signup = json.loads(cliente_signup.get_data())
