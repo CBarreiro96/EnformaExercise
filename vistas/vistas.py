@@ -312,3 +312,18 @@ class VistaRutinas(Resource):
             rutinas = entrenador.rutinas
             rutinas_ordenadas = sorted(rutinas, key=lambda rutina: rutina.nombre.lower())
             return [rutina_schema.dump(rutina) for rutina in rutinas_ordenadas]
+
+
+class VistaCliente(Resource):
+
+    def post(self):
+        usuario = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
+        if usuario is None:
+            contrasena_encriptada = hashlib.md5(request.json["contrasena"].encode('utf-8')).hexdigest()
+            nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=contrasena_encriptada,
+                                    rol=Roles.CLIENTE)
+            db.session.add(nuevo_usuario)
+            db.session.commit()
+            return {"mensaje": "usuario creado exitosamente", "id": nuevo_usuario.id}
+        else:
+            return {"mensaje": "El usuario ya existe"}, 404
