@@ -54,7 +54,7 @@ class TestRutina_ejercicio(TestCase):
             headers = headers
         )
 
-
+        ##
         self.assertEqual(result_ejercicio_rutina.status_code, 201)
 
     def tearDown(self):
