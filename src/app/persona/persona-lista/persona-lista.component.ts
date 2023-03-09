@@ -73,6 +73,10 @@ export class PersonaListaComponent implements OnInit {
     this.routerPath.navigate(['/persona/terminar/' + idPersona]);
   }
 
+  personaRegistrar(): void {
+    this.routerPath.navigate(['/persona/registrar/']);
+  }
+
   ngOnInit() {
     this.personaService.darPersonas().subscribe((personas) => {
       this.personas = personas;

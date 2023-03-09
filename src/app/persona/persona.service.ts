@@ -58,4 +58,9 @@ export class PersonaService {
 
   }
 
+  registroPersona(usuario: string, contrasena: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/signin/persona`, { "usuario": usuario, "contrasena": contrasena })
+  }
+
+
 }
