@@ -1,7 +1,6 @@
 import json
 import unittest
 
-
 from faker import Faker
 
 from app import app
