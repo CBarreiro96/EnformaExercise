@@ -57,4 +57,9 @@ class TestRutina_ejercicio(TestCase):
 
         self.assertEqual(result_ejercicio_rutina.status_code, 201)
 
-
+    def tearDown(self):
+        rutina = Rutina.query.get_or_404(self.id_rutina)
+        ejercicio = Ejercicio.query.get_or_404 (self.id_ejercicio)
+        db.session.delete(rutina)
+        db.session.delete(ejercicio)
+        db.session.commit()
