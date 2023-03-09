@@ -14,7 +14,7 @@ class Ejercicio(db.Model):
     video = db.Column(db.String(512))
     calorias = db.Column(db.Numeric)
     entrenamientos = db.relationship('Entrenamiento')
-    rutina = db.Column(db.Integer, db.ForeignKey('rutina.id'))
+    rutinas =  db.relationship('Rutina', secondary = 'Rutina_Ejercicio', back_populates="ejercicios")
 
 
 class Persona(db.Model):
@@ -60,7 +60,7 @@ class Rutina(db.Model):
     nombre = db.Column(db.String(50))
     descripcion = db.Column(db.String(100))
     entrenador = db.Column(db.Integer, db.ForeignKey('entrenador.id'))
-    ejercicios = db.relationship('Ejercicio', cascade='all, delete, delete-orphan')
+    ejercicios = db.relationship('Ejercicio', secondary = 'Rutina_Ejercicio', back_populates="rutinas")
 
 class Entrenamiento(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -70,7 +70,9 @@ class Entrenamiento(db.Model):
     ejercicio = db.Column(db.Integer, db.ForeignKey('ejercicio.id'))
     persona = db.Column(db.Integer, db.ForeignKey('persona.id'))
 
-
+rutinas_ejercicios = db.Table('Rutina_Ejercicio',
+    db.Column('rutina_id', db.Integer, db.ForeignKey('rutina.id'), primary_key = True),
+    db.Column('ejercicio_id', db.Integer, db.ForeignKey('ejercicio.id'), primary_key = True))
 class EjercicioSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Ejercicio

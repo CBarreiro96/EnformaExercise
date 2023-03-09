@@ -53,8 +53,8 @@ class TestRutina_ejercicio(TestCase):
             data = json.dumps(rutina_ejercicio),
             headers = headers
         )
-        datos_respuesta = json.load(result_ejercicio_rutina.getData())
+        
 
-        self.assertEqual(datos_respuesta.status_code, 201)
+        self.assertEqual(result_ejercicio_rutina.status_code, 201)
 
 
