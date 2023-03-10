@@ -6,11 +6,11 @@
           <h1 class="text-center">Registro Persona</h1>
         </div>
 
-        <form [formGroup]="this.personaForm" (ngSubmit)="registrarPersona()">
+        <form [formGroup]="this.personaForm" (ngSubmit)="registrarPersona(personaForm.value)">
 
           <div class="form-group">
             <div class="mb-3 row">
-              <label for="persona" class="col-lg-3 col-form-label">Usuario</label>
+              <label for="usuario" class="col-lg-3 col-form-label">Usuario</label>
               <div class="col-lg-9  ">
                 <input formControlName="usuario" type="text" class="form-control" placeholder="Usuario">
               </div>
