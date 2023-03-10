@@ -102,9 +102,9 @@ export class PersonaListaComponent implements OnInit {
         }
       )
     }else{
-      this.personaService.darPersonas().subscribe((personas)=>{
+      this.personaService.darPersonaUsuario().subscribe((personas)=>{
 
-        this.personas =personas;
+        this.personas.push(personas);
         const personaId = parseInt(this.router.snapshot.params['id']);
       })
     }
