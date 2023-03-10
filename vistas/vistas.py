@@ -101,6 +101,7 @@ class VistaPersonas(Resource):
         db.session.commit()
         return persona_schema.dump(nueva_persona)
 
+
 class VistaPersona(Resource):
     @jwt_required()
     def get(self, id_persona):
