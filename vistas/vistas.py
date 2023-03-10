@@ -335,3 +335,8 @@ class VistaCliente(Resource):
         db.session.commit()
 
         return nuevo_usuario
+
+class VistaUsuarioPersona (Resource):
+    def get (self, id_usuario):
+        persona = Persona.query.filter(Persona.usuario == id_usuario).first()
+        return persona_schema.dump(persona);
