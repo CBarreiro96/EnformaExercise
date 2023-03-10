@@ -74,12 +74,13 @@ class VistaLogIn(Resource):
 class VistaPersonas(Resource):
     @jwt_required()
     def get(self, id_usuario):
-        usuario = Usuario.query.get_or_404(id_usuario)
-        return [persona_schema.dump(persona) for persona in usuario.personas]
+        entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
+        return [persona_schema.dump(persona) for persona in entrenador.personas]
 
     @jwt_required()
     def post(self, id_usuario):
         usuario = Usuario.query.get_or_404(id_usuario)
+        entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
         nueva_persona = Persona( \
             nombre=request.json["nombre"], \
             apellido=request.json["apellido"], \
@@ -94,10 +95,10 @@ class VistaPersonas(Resource):
             entrenando=bool(request.json["entrenando"]), \
             razon=request.json["razon"], \
             terminado=datetime.strptime(request.json["terminado"], '%Y-%m-%d'), \
-            entrenador=usuario \
+            entrenador=entrenador.id \
             )
-        usuario.personas.append(nueva_persona)
-        db.session.add(usuario)
+        #usuario.personas.append(nueva_persona)
+        #db.session.add(usuario)
         db.session.add(nueva_persona)
         db.session.commit()
         return persona_schema.dump(nueva_persona)
