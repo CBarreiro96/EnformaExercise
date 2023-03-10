@@ -94,7 +94,7 @@ class VistaPersonas(Resource):
             entrenando=bool(request.json["entrenando"]), \
             razon=request.json["razon"], \
             terminado=datetime.strptime(request.json["terminado"], '%Y-%m-%d'), \
-            usuario=usuario \
+            entrenador=usuario \
             )
         usuario.personas.append(nueva_persona)
         db.session.add(usuario)
@@ -307,14 +307,23 @@ class VistaRutinas(Resource):
 
 class VistaCliente(Resource):
 
-    def post(self):
+    def post(self, id_persona):
+        persona = Persona.query.filter(Persona.id == id_persona).first()
+        if persona and persona.usuario: return {"mensaje": "La persona ya tiene asociado un usuario"}, 409
         usuario = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
         if usuario is None:
-            contrasena_encriptada = hashlib.md5(request.json["contrasena"].encode('utf-8')).hexdigest()
-            nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=contrasena_encriptada,
-                                    rol=Roles.CLIENTE)
-            db.session.add(nuevo_usuario)
-            db.session.commit()
+            nuevo_usuario = self.crear_usuario_persona(persona)
             return {"mensaje": "usuario creado exitosamente", "id": nuevo_usuario.id}
         else:
             return {"mensaje": "El usuario ya existe"}, 404
+
+    def crear_usuario_persona(self, persona):
+        contrasena_encriptada = hashlib.md5(request.json["contrasena"].encode('utf-8')).hexdigest()
+        nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=contrasena_encriptada,
+                                rol=Roles.CLIENTE)
+        db.session.add(nuevo_usuario)
+        db.session.commit()
+        persona.usuario = nuevo_usuario.id
+        db.session.commit()
+
+        return nuevo_usuario
