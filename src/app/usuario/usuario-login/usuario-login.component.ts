@@ -43,6 +43,10 @@ export class UsuarioLoginComponent implements OnInit {
         });
         if (res.rol == 'Administrador') this.router.navigate([`/entrenador`]);
         else if (res.rol == 'Entrenador') this.router.navigate([`/persona`]);
+        else if (res.rol == 'Cliente') {
+           this.router.navigate([`/persona/${res.id}`]);
+
+        }
       },
       (error) => {
         this.error = 'Usuario o contraseña incorrectos';
