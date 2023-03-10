@@ -1,21 +1,32 @@
 <app-encabezado></app-encabezado>
 <div class="row">
-  <div class="col col-4">
+  <div *ngIf="esCliente">
     <div class="card" style="width: 100%;">
       <div class="card-header">
-        Personas <button type="button" class="btn btn-warning" (click)="personaCrear()"><i class="bi bi-plus-circle"></i></button>
+        <tr *ngFor="let persona of personas">
+          {{persona.nombre}} {{persona.apellido}}
+        </tr>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col col-4">
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        Personas <button  *ngIf="esCliente== false" type="button" class="btn btn-warning" (click)="personaCrear()"><i class="bi bi-plus-circle"></i></button>
       </div>
       <table class="table" border="1">
         <tbody>
           <tr *ngFor="let persona of personas">
             <td>{{persona.nombre}} {{persona.apellido}}</td>
             <td>
-              <button [disabled]="!persona.entrenando" type="button" class="btn btn-warning" (click)="elegir(persona)"><i class="bi bi-eye"></i></button>&nbsp;
-              <button [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaEditar(persona.id)"><i class="bi bi-pencil"></i></button>&nbsp;
+              <button  [disabled]="!persona.entrenando" type="button" class="btn btn-warning" (click)="elegir(persona)"><i class="bi bi-eye"></i></button>&nbsp;
+              <button *ngIf="esCliente == false" [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaEditar(persona.id)"><i class="bi bi-pencil"></i></button>&nbsp;
               <button type="button" class="btn btn-primary" (click)="personaReporte(persona.id)"><i class="bi bi-clipboard-heart"></i></button>&nbsp;
-              <button [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaTerminar(persona.id)"><i class="bi bi-door-closed"></i></button>&nbsp;
-              <button type="button" class="btn btn-danger" (click)="personaEliminar(persona.id)"><i class="bi bi-trash"></i></button>&nbsp;
-              <button type="button" class="btn btn-info" (click)="personaRegistrar()"><i class="bi bi-key"></i></button>
+              <button *ngIf="esCliente == false" [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaTerminar(persona.id)"><i class="bi bi-door-closed"></i></button>&nbsp;
+
+              <button type="button" *ngIf="esCliente == false" class="btn btn-danger" (click)="personaEliminar(persona.id)"><i class="bi bi-trash"></i></button>&nbsp;
+              <button type="button" *ngIf="esCliente == false" class="btn btn-info" (click)="personaRegistrar()"><i class="bi bi-key"></i></button>
             </td>
           </tr>
         </tbody>
