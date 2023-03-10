@@ -15,6 +15,7 @@ import { EntrenamientoEditarComponent } from './entrenamiento/entrenamiento-edit
 import { EntrenadorListaComponent } from './entrenador/entrenador-lista/entrenador-lista.component';
 import { RutinaCrearComponent } from './rutina/rutina-crear/rutina-crear.component';
 import { RutinaListaComponent } from './rutina/rutina-lista/rutina-lista.component';
+import {PersonaRegistroComponent} from "./persona/persona-registro/persona-registro.component";
 
 const routes: Routes = [
   { path: '', component: UsuarioLoginComponent, pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
     component: PersonaCrearComponent,
     pathMatch: 'full',
   },
+  { path: 'persona/registrar', component: PersonaRegistroComponent, pathMatch: 'full' },
   { path: 'persona', component: PersonaListaComponent, pathMatch: 'full' },
   { path: 'persona/:id', component: PersonaListaComponent, pathMatch: 'full' },
   {

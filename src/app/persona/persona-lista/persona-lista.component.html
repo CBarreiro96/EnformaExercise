@@ -15,6 +15,7 @@
               <button type="button" class="btn btn-primary" (click)="personaReporte(persona.id)"><i class="bi bi-clipboard-heart"></i></button>&nbsp;
               <button [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaTerminar(persona.id)"><i class="bi bi-door-closed"></i></button>&nbsp;
               <button type="button" class="btn btn-danger" (click)="personaEliminar(persona.id)"><i class="bi bi-trash"></i></button>&nbsp;
+              <button type="button" class="btn btn-info" (click)="personaRegistrar()"><i class="bi bi-key"></i></button>
             </td>
           </tr>
         </tbody>
