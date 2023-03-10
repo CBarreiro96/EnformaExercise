@@ -4,10 +4,10 @@ import unittest
 from faker import Faker
 
 from app import app
-from modelos import db, Usuario, Roles
+from modelos import db, Usuario, Roles, Persona
 
 
-class testEntrenador(unittest.TestCase):
+class testPersona(unittest.TestCase):
 
     def setUp(self):
         self.data_factory = Faker()
@@ -28,7 +28,10 @@ class testEntrenador(unittest.TestCase):
             "usuario": nombre_usuario,
             "contrasena": contrasena
         }
-        cliente_signup = self.cliente.post("/signin/persona",
+        nueva_persona = Persona()
+        db.session.add(nueva_persona)
+        db.session.commit()
+        cliente_signup = self.cliente.post("/signin/persona/"+ str(nueva_persona.id),
                                            data=json.dumps(usuario),
                                            headers={'Content-Type': 'application/json', 'status_code': 200})
         respuesta_signup = json.loads(cliente_signup.get_data())
