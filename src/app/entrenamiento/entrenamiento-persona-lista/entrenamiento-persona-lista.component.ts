@@ -14,6 +14,8 @@ export class EntrenamientoPersonaListaComponent implements OnInit {
 
   @Input() personaDetalle: Persona;
   @Input() entrenamientos: Array<Entrenamiento>;
+  esCliente = false;
+  rolUsuario: string = '';
 
   constructor(
     private routerPath: Router,
@@ -23,6 +25,10 @@ export class EntrenamientoPersonaListaComponent implements OnInit {
      { }
 
   ngOnInit() {
+    this.rolUsuario = sessionStorage.getItem('rolUsuario');
+    if (this.rolUsuario === 'Cliente') {
+      this.esCliente = true;
+    }
   }
 
   entrenamientoCrear() {
