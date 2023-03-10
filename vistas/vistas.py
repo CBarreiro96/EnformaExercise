@@ -97,8 +97,6 @@ class VistaPersonas(Resource):
             terminado=datetime.strptime(request.json["terminado"], '%Y-%m-%d'), \
             entrenador=entrenador.id \
             )
-        #usuario.personas.append(nueva_persona)
-        #db.session.add(usuario)
         db.session.add(nueva_persona)
         db.session.commit()
         return persona_schema.dump(nueva_persona)
