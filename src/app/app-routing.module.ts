@@ -25,7 +25,7 @@ const routes: Routes = [
     component: PersonaCrearComponent,
     pathMatch: 'full',
   },
-  { path: 'persona/registrar', component: PersonaRegistroComponent, pathMatch: 'full' },
+  { path: 'persona/registrar/:id', component: PersonaRegistroComponent, pathMatch: 'full' },
   { path: 'persona', component: PersonaListaComponent, pathMatch: 'full' },
   { path: 'persona/:id', component: PersonaListaComponent, pathMatch: 'full' },
   {
