@@ -34,7 +34,6 @@ export class PersonaRegistroComponent implements OnInit {
       password: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(8)]],
       confirmPassword: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(8)]],
     });
-    console.log(this.personaForm)
   }
 
   registrarPersona(persona: Persona): void{
@@ -46,7 +45,13 @@ export class PersonaRegistroComponent implements OnInit {
         this.routerPath.navigate(['/persona/']);
       },
         error => { // Si el registro falló, se muestra un mensaje de error
-          this.toastrService.error("Error en el registro. Verifique que el usuario no se encuentre ya registrado", "Error", {closeButton: true});
+          if(error.status === 409) {
+            this.toastrService.error("El cliente ya posee un usuario", "Error", {closeButton: true});
+          }
+          else {
+            this.toastrService.error("Error en el registro. Verifique que el usuario no se encuentre ya registrado", "Error", {closeButton: true});
+
+          }
         })
   }
 
