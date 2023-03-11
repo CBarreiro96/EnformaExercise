@@ -8,27 +8,27 @@ import { RutinaListaComponent } from './rutina-lista/rutina-lista.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RutinaDetalleComponent } from './rutina-detalle/rutina-detalle.component';
 import { EjercicioRutinaListaComponent } from '../ejercicio/ejercicio-rutina-lista/ejercicio-rutina-lista.component';
-
-
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   exports: [
     RutinaCrearComponent,
     RutinaListaComponent,
     RutinaDetalleComponent,
-    EjercicioRutinaListaComponent
+    EjercicioRutinaListaComponent,
   ],
   declarations: [
     RutinaCrearComponent,
     RutinaListaComponent,
     RutinaDetalleComponent,
-    EjercicioRutinaListaComponent
+    EjercicioRutinaListaComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
     EncabezadoAppModule,
-  ]
+    NgbPaginationModule,
+  ],
 })
-export class RutinaModule { }
+export class RutinaModule {}

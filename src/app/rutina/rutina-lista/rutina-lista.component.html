@@ -10,9 +10,9 @@
         <tbody>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Accion</th>
+            <th scope="col">Acción</th>
           </tr>
-          <tr *ngFor="let rutina of rutinas">
+          <tr *ngFor="let rutina of rutinas | slice : (page - 1) * pageSize : page * pageSize">
             <td>{{rutina.nombre}}</td>
             <td>
               <button type="button" class="btn btn-warning" (click)="elegir(rutina)"><i class="bi bi-eye"></i></button>&nbsp;
@@ -22,6 +22,15 @@
           </tr>
         </tbody>
       </table>
+      <ngb-pagination
+        class="d-flex justify-content-center"
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="rutinas.length"
+        [boundaryLinks]="true"
+        [maxSize]="3"
+        [rotate]="true"
+      ></ngb-pagination>
     </div>
   </div>
   <div class="col col-8">
