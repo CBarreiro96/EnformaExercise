@@ -8,6 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { EncabezadoComponent } from 'src/app/encabezado-app/encabezado/encabezado.component';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('RutinaListaComponent', () => {
   let component: RutinaListaComponent;
@@ -18,14 +19,11 @@ describe('RutinaListaComponent', () => {
       imports: [
         ToastrModule.forRoot(),
         HttpClientModule,
+        NgbPaginationModule,
         RouterTestingModule,
       ],
-      declarations: [
-        RutinaListaComponent,
-        EncabezadoComponent
-      ]
-    })
-    .compileComponents();
+      declarations: [RutinaListaComponent, EncabezadoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -38,10 +36,8 @@ describe('RutinaListaComponent', () => {
     expect(component).toBeTruthy();
   });
 
-
   it('should display the list', () => {
     const list = fixture.nativeElement.querySelector('ul');
     expect(list).toBeTruthy();
   });
-
 });
