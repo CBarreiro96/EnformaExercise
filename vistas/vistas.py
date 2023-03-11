@@ -74,12 +74,13 @@ class VistaLogIn(Resource):
 class VistaPersonas(Resource):
     @jwt_required()
     def get(self, id_usuario):
-        usuario = Usuario.query.get_or_404(id_usuario)
-        return [persona_schema.dump(persona) for persona in usuario.personas]
+        entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
+        return [persona_schema.dump(persona) for persona in entrenador.personas]
 
     @jwt_required()
     def post(self, id_usuario):
         usuario = Usuario.query.get_or_404(id_usuario)
+        entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
         nueva_persona = Persona( \
             nombre=request.json["nombre"], \
             apellido=request.json["apellido"], \
@@ -94,10 +95,8 @@ class VistaPersonas(Resource):
             entrenando=bool(request.json["entrenando"]), \
             razon=request.json["razon"], \
             terminado=datetime.strptime(request.json["terminado"], '%Y-%m-%d'), \
-            usuario=usuario \
+            entrenador=entrenador.id \
             )
-        usuario.personas.append(nueva_persona)
-        db.session.add(usuario)
         db.session.add(nueva_persona)
         db.session.commit()
         return persona_schema.dump(nueva_persona)
@@ -142,7 +141,8 @@ class VistaEjercicios(Resource):
     @jwt_required()
     def get(self):
         ejercicios = Ejercicio.query.all()
-        return [ejercicio_schema.dump(ejercicio) for ejercicio in ejercicios]
+        ejercicios_ordenados = sorted(ejercicios, key=lambda ejercicio: ejercicio.nombre.lower())
+        return [ejercicio_schema.dump(ejercicio) for ejercicio in ejercicios_ordenados]
 
     @jwt_required()
     def post(self):
@@ -292,14 +292,55 @@ class VistaRutina(Resource):
             return True
 
 
+class VistaEjercicioRutina(Resource):
+    def put(self):
+        id_rutina = request.json["id_rutina"]
+        id_ejercicio = request.json["id_ejercicio"]
+        rutina = Rutina.query.get_or_404(id_rutina)
+        cantidad_ejercicios = len(rutina.ejercicios)
+        if cantidad_ejercicios < 5:
+            ejercicio = Ejercicio.query.get_or_404(id_ejercicio)
+            rutina.ejercicios.append(ejercicio)
+            db.session.commit()
+            return rutina_schema.dump(rutina), 201
+        else:
+            return {"message": "no se pueden agregar mas de 5 ejercicios"}, 404
+
+
 class VistaRutinas(Resource):
     @jwt_required()
-    def get(self, id_usuario):
 
-        entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
-        if entrenador is None:
-            return {"message:": "el entrenador no existe"}, 404
+    def get(self, id_usuario):
+        rutinas = Rutina.query.all()
+        rutinas_ordenadas = sorted(rutinas, key=lambda rutina: rutina.nombre.lower())
+        return [rutina_schema.dump(rutina) for rutina in rutinas_ordenadas]
+
+
+class VistaCliente(Resource):
+
+    def post(self, id_persona):
+        persona = Persona.query.filter(Persona.id == id_persona).first()
+        if persona and persona.usuario: return {"mensaje": "La persona ya tiene asociado un usuario"}, 409
+        usuario = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
+        if usuario is None:
+            nuevo_usuario = self.crear_usuario_persona(persona)
+            return {"mensaje": "usuario creado exitosamente", "id": nuevo_usuario.id}
         else:
-            rutinas = entrenador.rutinas
-            rutinas_ordenadas = sorted(rutinas, key=lambda rutina: rutina.nombre.lower())
-            return [rutina_schema.dump(rutina) for rutina in rutinas_ordenadas]
+            return {"mensaje": "El usuario ya existe"}, 404
+
+    def crear_usuario_persona(self, persona):
+        contrasena_encriptada = hashlib.md5(request.json["contrasena"].encode('utf-8')).hexdigest()
+        nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=contrasena_encriptada,
+                                rol=Roles.CLIENTE)
+        db.session.add(nuevo_usuario)
+        db.session.commit()
+        persona.usuario = nuevo_usuario.id
+        db.session.commit()
+
+        return nuevo_usuario
+
+
+class VistaUsuarioPersona(Resource):
+    def get(self, id_usuario):
+        persona = Persona.query.filter(Persona.usuario == id_usuario).first()
+        return persona_schema.dump(persona);
