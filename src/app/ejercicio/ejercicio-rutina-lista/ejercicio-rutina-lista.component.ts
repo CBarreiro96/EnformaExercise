@@ -54,7 +54,7 @@ export class EjercicioRutinaListaComponent implements OnInit {
                 );
               },
               (error) => {
-                this.toastrService.error('Ocurrió un error', 'Información');
+                this.toastrService.error('Ocurrió un error: '+ error.error.message, 'Información');
               }
             );
 

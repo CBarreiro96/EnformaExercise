@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { EjercicioRutinaListaComponent } from './ejercicio-rutina-lista.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('EjercicioRutinaListaComponent', () => {
   let component: EjercicioRutinaListaComponent;
@@ -11,9 +13,9 @@ describe('EjercicioRutinaListaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EjercicioRutinaListaComponent ]
-    })
-    .compileComponents();
+      declarations: [EjercicioRutinaListaComponent],
+      imports: [HttpClientModule, ToastrModule.forRoot()],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

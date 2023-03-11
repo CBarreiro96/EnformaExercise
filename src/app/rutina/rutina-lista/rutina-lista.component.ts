@@ -18,6 +18,8 @@ export class RutinaListaComponent implements OnInit {
   elegida: Boolean = false
   rutinaElegida: Rutina
   ejercicios: Array<Ejercicio> = []
+  page = 1;
+  pageSize = 15;
 
   constructor(
     private routerPath: Router,
