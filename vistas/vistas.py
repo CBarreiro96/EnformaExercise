@@ -304,7 +304,7 @@ class VistaEjercicioRutina(Resource):
             db.session.commit()
             return rutina_schema.dump(rutina), 201
         else:
-            return {"message:": "no se pueden agregar mas de 5 ejercicios"}, 404
+            return {"message": "no se pueden agregar mas de 5 ejercicios"}, 404
 
 
 class VistaRutinas(Resource):
