@@ -141,7 +141,8 @@ class VistaEjercicios(Resource):
     @jwt_required()
     def get(self):
         ejercicios = Ejercicio.query.all()
-        return [ejercicio_schema.dump(ejercicio) for ejercicio in ejercicios]
+        ejercicios_ordenados = sorted(ejercicios, key=lambda ejercicio: ejercicio.nombre.lower())
+        return [ejercicio_schema.dump(ejercicio) for ejercicio in ejercicios_ordenados]
 
     @jwt_required()
     def post(self):
@@ -289,28 +290,30 @@ class VistaRutina(Resource):
             return False
         else:
             return True
-class VistaEjercicioRutina (Resource):
+
+
+class VistaEjercicioRutina(Resource):
     def put(self):
         id_rutina = request.json["id_rutina"]
         id_ejercicio = request.json["id_ejercicio"]
         rutina = Rutina.query.get_or_404(id_rutina)
-        ejercicio = Ejercicio.query.get_or_404 (id_ejercicio)
-        rutina.ejercicios.append(ejercicio)
-        db.session.commit()
-        return rutina_schema.dump(rutina), 201
+        cantidad_ejercicios = len(rutina.ejercicios)
+        if cantidad_ejercicios < 5:
+            ejercicio = Ejercicio.query.get_or_404(id_ejercicio)
+            rutina.ejercicios.append(ejercicio)
+            db.session.commit()
+            return rutina_schema.dump(rutina), 201
+        else:
+            return {"message:": "no se pueden agregar mas de 5 ejercicios"}, 404
 
 
 class VistaRutinas(Resource):
     @jwt_required()
-    def get(self, id_usuario):
 
-        entrenador = Entrenador.query.filter(Entrenador.usuario == id_usuario).first()
-        if entrenador is None:
-            return {"message:": "el entrenador no existe"}, 404
-        else:
-            rutinas = entrenador.rutinas
-            rutinas_ordenadas = sorted(rutinas, key=lambda rutina: rutina.nombre.lower())
-            return [rutina_schema.dump(rutina) for rutina in rutinas_ordenadas]
+    def get(self, id_usuario):
+        rutinas = Rutina.query.all()
+        rutinas_ordenadas = sorted(rutinas, key=lambda rutina: rutina.nombre.lower())
+        return [rutina_schema.dump(rutina) for rutina in rutinas_ordenadas]
 
 
 class VistaCliente(Resource):
@@ -336,7 +339,8 @@ class VistaCliente(Resource):
 
         return nuevo_usuario
 
-class VistaUsuarioPersona (Resource):
-    def get (self, id_usuario):
+
+class VistaUsuarioPersona(Resource):
+    def get(self, id_usuario):
         persona = Persona.query.filter(Persona.usuario == id_usuario).first()
         return persona_schema.dump(persona);
