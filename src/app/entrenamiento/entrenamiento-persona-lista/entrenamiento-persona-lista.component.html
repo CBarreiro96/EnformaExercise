@@ -3,7 +3,7 @@
     <div class="card" style="width: 100%;">
       <div class="card-body">
         <h5 class="card-title">Datos de entrenamiento
-          <button type="button" class="btn btn-warning" (click)="entrenamientoCrear()"><i class="bi bi-plus-circle"></i></button>
+          <button *ngIf="!esCliente" type="button" class="btn btn-warning" (click)="entrenamientoCrear()"><i class="bi bi-plus-circle"></i></button>
         </h5>
         <table class="table table-striped" border="1">
           <thead>
@@ -12,7 +12,7 @@
               <th>Fecha</th>
               <th>Duración</th>
               <th>Repeticiones</th>
-              <th>Acciones</th>
+              <th *ngIf="!esCliente" >Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -21,10 +21,8 @@
               <td>{{entrenamiento.fecha | date: 'dd/MM/yyyy'}}</td>
               <td>{{entrenamiento.tiempo}}</td>
               <td>{{entrenamiento.repeticiones | number:'1.2-2'}}</td>
-              <td>
-                <button type="button" class="btn btn-primary" (click)="entrenamientoEditar(entrenamiento.id)"><i class="bi bi-pencil"></i></button>&nbsp;
-                &nbsp;
-                <button type="button" class="btn btn-danger" (click)="entrenamientoEliminar(entrenamiento.id)"><i class="bi bi-trash"></i></button>
+              <td>                &nbsp;
+                <button *ngIf="!esCliente" type="button" class="btn btn-danger" (click)="entrenamientoEliminar(entrenamiento.id)"><i class="bi bi-trash"></i></button>
               </td>
             </tr>
           </tbody>

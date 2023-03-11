@@ -19,6 +19,8 @@ export class PersonaListaComponent implements OnInit {
   personaElegida: Persona
   entrenamientos: Array<Entrenamiento> = []
 
+  esCliente = true;
+
   constructor(
     private routerPath: Router,
     private router: ActivatedRoute,
@@ -73,22 +75,38 @@ export class PersonaListaComponent implements OnInit {
     this.routerPath.navigate(['/persona/terminar/' + idPersona]);
   }
 
+  personaRegistrar(idPersona: number): void {
+    this.routerPath.navigate(['/persona/registrar/'+ idPersona]);
+  }
+
   ngOnInit() {
-    this.personaService.darPersonas().subscribe((personas) => {
-      this.personas = personas;
-      const personaId = parseInt(this.router.snapshot.params['id']);
-      if(!(personaId==null)) {
-        for(let i=0;i<this.personas.length;i++) {
-          if(this.personas[i].id==personaId) {
-            this.entrenamientoService.darEntrenamientos(personaId).subscribe((entrenamientos) => {
-              this.elegida = true;
-              this.personaElegida = this.personas[i];
-              this.entrenamientos = entrenamientos;
-            });
-            //i=this.personas.length;
+    this.esCliente = sessionStorage.getItem('rolUsuario') == 'Cliente';
+    if (!this.esCliente) {
+      this.personaService.darPersonas().subscribe((personas) => {
+          this.personas = personas;
+          const personaId = parseInt(this.router.snapshot.params['id']);
+          if (!(personaId == null)) {
+            console.log('si hay personas');
+            for (let i = 0; i < this.personas.length; i++) {
+              if (this.personas[i].id == personaId) {
+                console.log('entre al if');
+                this.entrenamientoService.darEntrenamientos(personaId).subscribe((entrenamientos) => {
+                  this.elegida = true;
+                  this.personaElegida = this.personas[i];
+                  this.entrenamientos = entrenamientos;
+                });
+                //i=this.personas.length;
+              }
+            }
           }
         }
-      }
-    })
+      )
+    }else{
+      this.personaService.darPersonaUsuario().subscribe((personas)=>{
+
+        this.personas.push(personas);
+        const personaId = parseInt(this.router.snapshot.params['id']);
+      })
+    }
   }
 }

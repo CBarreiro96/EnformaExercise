@@ -20,6 +20,13 @@ export class PersonaService {
     return this.http.get<Persona[]>(`${this.apiUrl}/personas/${idUsuario}`, { headers: headers })
   }
 
+  darPersonaUsuario (): Observable<Persona>{
+    const idUsuario = sessionStorage.getItem('idUsuario');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+    })
+    return this.http.get<Persona>(`${this.apiUrl}/usuario/cliente/${idUsuario}`, { headers: headers })
+  }
   crearPersona(persona: Persona): Observable<Persona> {
     const idUsuario = sessionStorage.getItem('idUsuario');
     const headers = new HttpHeaders({
@@ -56,6 +63,10 @@ export class PersonaService {
     })
     return this.http.get<Persona>(`${this.apiUrl}/persona/${id}/reporte`, { headers: headers })
 
+  }
+
+  registroPersona(usuario: string, contrasena: string,persona: Persona): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/signin/persona/${persona.id}`, { "personaid":persona.id,"usuario": usuario, "contrasena": contrasena })
   }
 
 }
