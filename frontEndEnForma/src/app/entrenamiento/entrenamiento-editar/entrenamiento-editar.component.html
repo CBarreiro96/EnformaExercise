@@ -1,0 +1,119 @@
+<app-encabezado></app-encabezado>
+<h3>
+  Editar entrenamiento
+</h3>
+
+<form
+ [formGroup]="entrenamientoForm" *ngIf="entrenamientoForm"
+ (ngSubmit)="!entrenamientoForm.invalid && editarEntrenamiento(entrenamientoForm.value)"
+>
+  <!--Ejercicio-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="ejercicio">Ejercicio</label>
+    <select
+      id="ejercicio"
+      class="form-control"
+      formControlName="ejercicio"
+      >
+      <option *ngFor="let ejercicio of ejercicios" value="{{ ejercicio.id }}" [selected]="ejercicio.id==idEjercicio">
+        {{ ejercicio.nombre }}
+      </option>
+    </select>
+
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        entrenamientoForm.get('ejercicio')!.hasError('required') &&
+        entrenamientoForm.get('ejercicio')!.touched
+      "
+    >
+      Este campo debe estar diligenciado
+    </div>
+  </div>
+
+  <!--Fecha-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="fecha">Fecha</label>
+    <input
+      novalidate
+      id="fecha"
+      type="date"
+      class="form-control"
+      formControlName="fecha"
+      placeholder="Fecha del ejercicio"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        entrenamientoForm.get('fecha')!.hasError('required') &&
+        entrenamientoForm.get('fecha')!.touched
+      "
+    >
+      Este campo debe estar diligenciado
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="entrenamientoForm.get('fecha')!.hasError('maxlength')"
+    >
+      La fecha debe tener 10 caracteres
+    </div>
+  </div>
+
+  <!--Duración-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="tiempo">Duración</label>
+    <input
+      novalidate
+      id="tiempo"
+      class="form-control"
+      formControlName="tiempo"
+      placeholder="Duración"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        entrenamientoForm.get('tiempo')!.hasError('required') &&
+        entrenamientoForm.get('tiempo')!.touched
+      "
+    >
+      El campo no puede estar vacío
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="entrenamientoForm.get('tiempo')!.hasError('minlength')"
+    >
+      El campo debe tener un formato hh:mm:ss
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="entrenamientoForm.get('tiempo')!.hasError('maxlength')"
+    >
+      El campo debe tener un formato hh:mm:ss
+    </div>
+  </div>
+
+  <!--Repeticiones-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="repeticiones">Repeticiones</label>
+    <input
+      novalidate
+      id="repeticiones"
+      type="number"
+      class="form-control"
+      formControlName="repeticiones"
+      placeholder="Repeticiones"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        entrenamientoForm.get('repeticiones')!.hasError('required') &&
+        entrenamientoForm.get('repeticiones')!.touched
+      "
+    >
+      Este es un campo obligatorio
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!entrenamientoForm.valid">Actualizar</button>
+  <button type="button" class="btn btn-danger ml-3" (click)="cancelarEntrenamiento()">Cancelar</button>
+</form>

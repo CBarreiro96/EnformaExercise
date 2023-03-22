@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col col-12">
+    <div class="card" style="width: 100%">
+      <div class="card-body">
+        <h5 class="card-title">
+          Ejercicios de la rutina
+          <button
+            type="button"
+            class="btn btn-warning"
+            (click)="ejercicioCrear(content)"
+          >
+            <i class="bi bi-plus-circle"></i>
+          </button>
+        </h5>
+        <table class="table table-striped" border="1">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- list exercise -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Agregar ejercicio</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="ejercicioForm">
+      <div class="mb-3">
+        <label for="ejercicio">Ejercicio</label>
+        <select
+          name="ejercicio"
+          id="ejercicio"
+          formControlName="ejercicio"
+          class="form-select"
+          aria-label="Lista ejercicios"
+        >
+          <option selected value="">Selecccione un ejercicio</option>
+          <option
+            *ngFor="let ejercicio of ejerciciosCatalogo"
+            value="{{ ejercicio.id }}"
+          >
+            {{ ejercicio.nombre }}
+          </option>
+        </select>
+        <div
+          class="alert alert-danger my-3"
+          *ngIf="
+            ejercicioForm.get('ejercicio')?.hasError('required') &&
+            ejercicioForm.get('ejercicio')?.touched
+          "
+        >
+          Debe seleccionar un ejercicio para añadirlo a la rutina
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="modal.close('Agregar click')"
+      [disabled]="!ejercicioForm.valid"
+    >
+      Agregar
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="modal.dismiss('Cancelar click')"
+    >
+      Cancelar
+    </button>
+  </div>
+</ng-template>

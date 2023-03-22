@@ -1,0 +1,70 @@
+<app-encabezado></app-encabezado>
+<div class="card" style="width: 100%;" *ngIf="persona">
+  <div class="card-body">
+    <h5 class="card-title">{{persona.nombre}} {{persona.apellido}}</h5>
+    <div class="card-text">
+      <div class="row">
+        <div class="col col-12">
+          <div class="card" style="width: 100%;">
+            <div class="card-header">
+              Datos de la persona
+            </div>
+            <div class="row">
+              <div class="col col-2 fw-bold text-end">
+                Talla
+              </div>
+              <div class="col col-2">
+                {{persona.talla | number:'1.2-2'}} m
+              </div>
+              <div class="col col-3 fw-bold text-end">
+                Peso
+              </div>
+              <div class="col col-2">
+                {{persona.peso | number:'1.2-2'}} Kg
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-2 fw-bold text-end">
+                IMC
+              </div>
+              <div class="col col-2">
+                {{imc | number:'1.2-2'}}
+              </div>
+              <div class="col col-3 fw-bold text-end">
+                Clasificación IMC
+              </div>
+              <div class="col col-2">
+                {{clasificacion}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="card" style="width: 100%;">
+      <div class="card-header">
+        Resultados
+      </div>
+      <table class="table table-striped" border="1">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th># repeticiones realizadas</th>
+            <th>Calorías consumidas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let resultado of resultados">
+            <td>{{resultado.fecha}}</td>
+            <td>{{resultado.repeticiones | number:'1.2-2'}}</td>
+            <td>{{resultado.calorias | number:'1.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="btn btn-info ml-3" (click)="volver()">Regresar</button>
+  </div>
+</div>
+
+

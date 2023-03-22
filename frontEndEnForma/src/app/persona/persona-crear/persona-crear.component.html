@@ -1,0 +1,246 @@
+<app-encabezado></app-encabezado>
+<h3>
+  Persona nueva
+</h3>
+
+<form
+ [formGroup]="personaForm"
+ (ngSubmit)="!personaForm.invalid && crearPersona(personaForm.value)"
+>
+  <div class="row">
+    <div class="col col-6">
+      <!--Nombre-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="nombre">Nombre</label>
+        <input
+          novalidate
+          id="nombre"
+          class="form-control"
+          formControlName="nombre"
+          placeholder="Nombre"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('nombre')!.hasError('required') &&
+            personaForm.get('nombre')!.touched
+          "
+        >
+          Contenido requerido
+        </div>
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="personaForm.get('nombre')!.hasError('minlength')"
+        >
+          El contenido es muy corto, debe tener al menos dos caracteres.
+        </div>
+      </div>
+
+      <!--Apellido-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="apellido">Apellido</label>
+        <input
+          novalidate
+          id="apellido"
+          class="form-control"
+          formControlName="apellido"
+          placeholder="Apellido"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('nombre')!.hasError('required') &&
+            personaForm.get('nombre')!.touched
+          "
+        >
+          Contenido requerido
+        </div>
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="personaForm.get('nombre')!.hasError('minlength')"
+        >
+          El contenido es muy corto, debe tener al menos dos caracteres.
+        </div>
+      </div>
+
+      <!--Edad-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="descripcion">Edad</label>
+        <input
+          novalidate
+          id="edad"
+          type="number"
+          class="form-control"
+          formControlName="edad"
+          placeholder="Edad"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('edad')!.hasError('required') &&
+            personaForm.get('edad')!.touched
+          "
+        >
+          Por favor diligencie este campo
+        </div>
+      </div>
+
+      <!--Talla-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="talla">Talla en m</label>
+        <input
+          novalidate
+          id="talla"
+          type="number"
+          class="form-control"
+          formControlName="talla"
+          placeholder="Talla"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('talla')!.hasError('required') &&
+            personaForm.get('talla')!.touched
+          "
+        >
+          Por favor diligencie este campo
+        </div>
+      </div>
+
+      <!--Peso-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="peso">Peso en Kg</label>
+        <input
+          novalidate
+          id="peso"
+          type="number"
+          class="form-control"
+          formControlName="peso"
+          placeholder="Peso"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('peso')!.hasError('required') &&
+            personaForm.get('peso')!.touched
+          "
+        >
+          Por favor diligencie este campo
+        </div>
+      </div>
+
+      <!--Fecha de ingreso-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="ingreso">Fecha de ingreso</label>
+        <input
+          novalidate
+          type="date"
+          id="ingreso"
+          class="form-control"
+          formControlName="ingreso"
+          placeholder="Fecha ingreso"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('ingreso')!.hasError('required') &&
+            personaForm.get('ingreso')!.touched
+          "
+        >
+          Por favor diligencie este campo
+        </div>
+      </div>
+
+      <!--Brazo-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="brazo">Brazo en cm</label>
+        <input
+          novalidate
+          id="brazo"
+          type="number"
+          class="form-control"
+          formControlName="brazo"
+          placeholder="Brazo"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('brazo')!.hasError('required') &&
+            personaForm.get('brazo')!.touched
+          "
+        >
+          Por favor diligencie este campo
+        </div>
+      </div>
+
+      <!--Pecho-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="pecho">Pecho en cm</label>
+        <input
+          novalidate
+          id="pecho"
+          type="number"
+          class="form-control"
+          formControlName="pecho"
+          placeholder="Pecho"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('pecho')!.hasError('required') &&
+            personaForm.get('pecho')!.touched
+          "
+        >
+          Por favor diligencie este campo
+        </div>
+      </div>
+
+      <!--Cintura-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="cintura">Cintura en cm</label>
+        <input
+          novalidate
+          id="cintura"
+          type="number"
+          class="form-control"
+          formControlName="cintura"
+          placeholder="Cintura"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('cintura')!.hasError('required') &&
+            personaForm.get('cintura')!.touched
+          "
+        >
+          Por favor diligencie este campo
+        </div>
+      </div>
+
+      <!--Pierna-->
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="pierna">Pierna en cm</label>
+        <input
+          novalidate
+          id="pierna"
+          type="number"
+          class="form-control"
+          formControlName="pierna"
+          placeholder="Pierna"
+        />
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+            personaForm.get('pierna')!.hasError('required') &&
+            personaForm.get('pierna')!.touched
+          "
+        >
+          Por favor diligencie este campo
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!personaForm.valid">Crear</button>
+  <button type="button" class="btn btn-danger ml-3" (click)="cancelarPersona()">Cancelar</button>
+</form>

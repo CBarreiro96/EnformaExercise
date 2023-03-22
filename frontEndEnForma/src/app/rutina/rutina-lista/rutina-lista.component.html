@@ -1,0 +1,48 @@
+<app-encabezado></app-encabezado>
+
+<div class="row">
+  <div class="col col-4">
+    <div class="card" style="width: 100%;">
+      <div class="card-header">
+        Rutinas <button type="button" class="btn btn-warning" (click)="rutinaCrear()"><i class="bi bi-plus-circle"></i></button>
+      </div>
+      <table class="table" border="1" aria-describedby="Tabla lista rutinas">
+        <tbody>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acción</th>
+          </tr>
+          <tr *ngFor="let rutina of rutinas | slice : (page - 1) * pageSize : page * pageSize">
+            <td>{{rutina.nombre}}</td>
+            <td>
+              <button type="button" class="btn btn-warning" (click)="elegir(rutina)"><i class="bi bi-eye"></i></button>&nbsp;
+              <button [disabled]="!rutina.ejercicio" type="button" class="btn btn-primary" (click)="rutinaEditar(rutina.id)"><i class="bi bi-pencil"></i></button>&nbsp;
+              <button type="button" class="btn btn-danger" (click)="rutinaEliminar(rutina.id)"><i class="bi bi-trash"></i></button>&nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ngb-pagination
+        class="d-flex justify-content-center"
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="rutinas.length"
+        [boundaryLinks]="true"
+        [maxSize]="3"
+        [rotate]="true"
+      ></ngb-pagination>
+    </div>
+  </div>
+  <div class="col col-8">
+    <div *ngIf="elegida">
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <p class="card-text" *ngIf="rutinaElegida">
+            <app-rutina-detalle [rutinaDetalle]="rutinaElegida"></app-rutina-detalle>
+            <app-ejercicio-rutina-lista [ejercicios]="ejercicios" [rutinaDetalle]="rutinaElegida"></app-ejercicio-rutina-lista>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
