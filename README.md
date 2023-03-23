@@ -1,32 +1,43 @@
-# MISW4201-202311-Backend-Grupo06
+<h1 align="center">EnForma Exercise</h1>
 
-## Reports  
+It is a proyect that It was developed in the Andes University. Beside It was done by 4 student and one teacher.
+
+It is an app web abut exercise. There are three role (admin, coach and client).
+
+Funtionality
+Role Coach.
+* It can add new exercise 
+* It can add new routine
+* It can assign exercise and routine to her/his own client 
+
+## Install
+
+Clone the repository:
+> git clone https://github.com/CBarreiro96/EnformaExercise
+
+Create virtual environment with python
+> python3 -m venv env
+
+Activate environment
+> source env/bin/activate
+
+Install requirenment
+> pip install -r requirenment.txt
+
+Run flask
+> flask run
+
+Open new terminal , and you need to move to follow directory frontEndEnForma and you need to write to next command:
+> ng serve --open
+
+## Interfaces
+
+
+
+Developer:
+* David Leon Vargas - [david-lyon-uniandes](https://github.com/david-lyon-uniandes)
+* Benito Zarate - [Tobeny](https://github.com/Tobeny)
+* Camilo Barreiro - [CBarreiro22](https://github.com/CBarreiro22) or [CBarreiro96](https://github.com/CBarreiro96)
+* Isai Oliva - [iolivaMISO](https://github.com/iolivaMISO)
 
 [GitInspector](https://MISW-4201-ProcesosDesarrolloAgil.github.io/MISW4201-202311-Backend-Grupo06/reports) 
-# ProyectoFrontend
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

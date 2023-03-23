@@ -4,7 +4,8 @@ env/
 __pycache__/
 *.py[cod]
 *$py.class
-
+.angular
+node_modules
 # C extensions
 *.so
 
