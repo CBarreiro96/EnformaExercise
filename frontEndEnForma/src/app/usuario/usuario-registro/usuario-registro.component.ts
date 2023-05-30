@@ -37,8 +37,8 @@ export class UsuarioRegistroComponent implements OnInit {
   // Función que se llama cuando se hace clic en el botón de registro
   registrarUsuario() {
     // Llamada al método de registro del servicio UsuarioService, pasando los valores actuales del formulario
-    this.usuarioService.registro(
-      this.usuarioForm.get('usuario')?.value, 
+    this.usuarioService.registroEntrenador(
+      this.usuarioForm.get('usuario')?.value,
       this.usuarioForm.get('password')?.value,
       this.usuarioForm.get('nombre')?.value,
       this.usuarioForm.get('apellido')?.value
