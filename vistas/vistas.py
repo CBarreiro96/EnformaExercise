@@ -25,6 +25,7 @@ rutina_schema = RutinaSchema()
 
 class VistaSignIn(Resource):
   def post(self, rol):
+
     # Check if the user already exists
     usuario = Usuario.query.filter_by(usuario=request.json["usuario"]).first()
     if usuario is None:
