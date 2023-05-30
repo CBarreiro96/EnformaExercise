@@ -24,37 +24,50 @@ rutina_schema = RutinaSchema()
 
 
 class VistaSignIn(Resource):
+  def post(self, rol):
+    usuario = Usuario.query.filter_by(usuario=request.json["usuario"]).first()
+    if usuario is None:
+      contrasena_encriptada = hashlib.md5(request.json["contrasena"].encode('utf-8')).hexdigest()
+      nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=contrasena_encriptada)
 
-    def post(self):
-        usuario = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
-        if usuario is None:
-            contrasena_encriptada = hashlib.md5(request.json["contrasena"].encode('utf-8')).hexdigest()
-            nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=contrasena_encriptada,
-                                    rol=Roles.ENTRENADOR)
+      if rol == Roles.ADMIN:
+        nuevo_usuario.rol = Roles.ADMIN
+      elif rol == Roles.ENTRENADOR:
+        nuevo_usuario.rol = Roles.ENTRENADOR
+        nuevo_entrenador = Entrenador(nombre=request.json["nombre"], apellidos=request.json["apellido"],
+                                      usuario=nuevo_usuario.id)
+        db.session.add(nuevo_entrenador)
 
-            db.session.add(nuevo_usuario)
-            usuario_entrenador = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
-            nuevo_entrenador = Entrenador(nombre=request.json["nombre"], apellidos=request.json["apellido"],
-                                          usuario=usuario_entrenador.id)
-            db.session.add(nuevo_entrenador)
-            db.session.commit()
-            # token_de_acceso = create_access_token(identity=nuevo_usuario.id)
-            return {"mensaje": "usuario creado exitosamente", "id": nuevo_usuario.id}
-        else:
-            return {"mensaje": "El usuario ya existe"}, 404
+      db.session.add(nuevo_usuario)
+      db.session.commit()
 
-    def put(self, id_usuario):
-        usuario = Usuario.query.get_or_404(id_usuario)
-        usuario.contrasena = request.json.get("contrasena", usuario.contrasena)
-        db.session.commit()
-        return usuario_schema.dump(usuario)
+      return {"mensaje": "Usuario creado exitosamente", "id": nuevo_usuario.id}
+    else:
+      return {"mensaje": "El usuario ya existe"}, 404
 
-    def delete(self, id_usuario):
-        usuario = Usuario.query.get_or_404(id_usuario)
-        db.session.delete(usuario)
-        db.session.commit()
-        return '', 204
+  def put(self, id_usuario):
+    usuario = Usuario.query.get_or_404(id_usuario)
+    usuario.contrasena = request.json.get("contrasena", usuario.contrasena)
+    db.session.commit()
 
+    return usuario_schema.dump(usuario)
+
+  def delete(self, id_usuario):
+    usuario = Usuario.query.get_or_404(id_usuario)
+    db.session.delete(usuario)
+    db.session.commit()
+
+    return '', 204
+
+
+class VistaSignInAdministrator(VistaSignIn):
+  def post(self):
+    return super().post(Roles.ADMIN)
+
+
+class VistaSignInTraining(VistaSignIn):
+  def post(self):
+    return super().post(Roles.ENTRENADOR)
 
 class VistaLogIn(Resource):
 

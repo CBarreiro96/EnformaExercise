@@ -5,14 +5,14 @@ from flask_restful import Api
 
 from modelos import db
 from vistas import \
-    VistaSignIn, VistaLogIn, \
-    VistaPersona, VistaPersonas, \
-    VistaEjercicio, VistaEjercicios, \
-    VistaEntrenamiento, VistaEntrenamientos, VistaRutina, \
-    VistaReporte, VistaEntrenadores, VistaRutinas, VistaEjercicioRutina, VistaCliente, VistaUsuarioPersona
+  VistaSignInTraining, VistaLogIn, \
+  VistaPersona, VistaPersonas, \
+  VistaEjercicio, VistaEjercicios, \
+  VistaEntrenamiento, VistaEntrenamientos, VistaRutina, \
+  VistaReporte, VistaEntrenadores, VistaRutinas, VistaEjercicioRutina, VistaCliente, VistaUsuarioPersona
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dbapp.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:admin@localhost:5432/enForma'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'frase-secreta'
 app.config['PROPAGATE_EXCEPTIONS'] = True
@@ -26,7 +26,7 @@ db.create_all()
 cors = CORS(app)
 
 api = Api(app)
-api.add_resource(VistaSignIn, '/signin')
+api.add_resource(VistaSignInTraining, '/signinTraining')
 api.add_resource(VistaLogIn, '/login')
 api.add_resource(VistaPersonas, '/personas/<int:id_usuario>')
 api.add_resource(VistaPersona, '/persona/<int:id_persona>')
