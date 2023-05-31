@@ -11,6 +11,7 @@ import { PersonaEditarComponent } from './persona-editar/persona-editar.componen
 import { PersonaCrearComponent } from './persona-crear/persona-crear.component';
 import { EntrenamientoPersonaListaComponent } from '../entrenamiento/entrenamiento-persona-lista/entrenamiento-persona-lista.component';
 import {PersonaRegistroComponent} from "./persona-registro/persona-registro.component";
+import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {PersonaRegistroComponent} from "./persona-registro/persona-registro.comp
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    EncabezadoAppModule
+    EncabezadoAppModule,
+    NgbTooltip
   ],
   exports: [
     PersonaListaComponent,
