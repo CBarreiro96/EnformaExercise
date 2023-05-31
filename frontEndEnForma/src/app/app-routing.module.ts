@@ -69,6 +69,7 @@ const routes: Routes = [
     component: EntrenadorListaComponent,
     pathMatch: 'full',
   },
+  { path: 'entrenador/:id', component: EntrenadorListaComponent, pathMatch: 'full' },
   { path: 'rutina/crear', component: RutinaCrearComponent, pathMatch: 'full' },
   { path: 'rutina', component: RutinaListaComponent, pathMatch: 'full' },
 ];

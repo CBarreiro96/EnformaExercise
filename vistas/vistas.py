@@ -34,13 +34,15 @@ class VistaSignIn(Resource):
 
       if rol == Roles.ADMIN:
         nuevo_usuario.rol = Roles.ADMIN
+        db.session.add(nuevo_usuario)
       elif rol == Roles.ENTRENADOR:
         nuevo_usuario.rol = Roles.ENTRENADOR
+        db.session.add(nuevo_usuario)
+        usuario_entrenador = Usuario.query.filter(Usuario.usuario == request.json["usuario"]).first()
         nuevo_entrenador = Entrenador(nombre=request.json["nombre"], apellidos=request.json["apellido"],
-                                      usuario=nuevo_usuario.id)
+                                      usuario=usuario_entrenador.id)
         db.session.add(nuevo_entrenador)
 
-      db.session.add(nuevo_usuario)
       db.session.commit()
 
       return {"mensaje": "Usuario creado exitosamente", "id": nuevo_usuario.id}
@@ -287,6 +289,18 @@ class VistaEntrenadores(Resource):
     entrenadores = Entrenador.query.all()
     entrenadores_ordenados = sorted(entrenadores, key=lambda entrenador: entrenador.nombre.lower())
     return [entrenador_schema.dump(entrenador) for entrenador in entrenadores_ordenados]
+
+
+class VistaEntrenador(Resource):
+  @jwt_required()
+  def delete(self, id_entrenador):
+    entrenador = Entrenador.query.get_or_404(id_entrenador)
+    if not entrenador.personas:
+      db.session.delete(entrenador)
+      db.session.commit()
+      return '', 204
+    else:
+      return 'La entrenador tiene entrenamientos personas', 409
 
 
 class VistaRutina(Resource):
