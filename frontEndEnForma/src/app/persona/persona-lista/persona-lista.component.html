@@ -10,12 +10,14 @@
           <tr *ngFor="let persona of personas">
             <td >{{persona.nombre}} {{persona.apellido}}</td>
             <td>
-              <button  [disabled]="!persona.entrenando" type="button" class="btn btn-warning" (click)="elegir(persona)"><i class="bi bi-eye"></i></button>&nbsp;
-              <button *ngIf="esCliente == false" [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaEditar(persona.id)"><i class="bi bi-pencil"></i></button>&nbsp;
-              <button  type="button" class="btn btn-primary" (click)="personaReporte(persona.id)"><i class="bi bi-clipboard-heart"></i></button>&nbsp;
-              <button *ngIf="esCliente== false" [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaTerminar(persona.id)"><i class="bi bi-door-closed"></i></button>&nbsp;
-              <button *ngIf="esCliente== false" type="button" class="btn btn-danger" (click)="personaEliminar(persona.id)"><i class="bi bi-trash"></i></button>&nbsp;
-              <button *ngIf="esCliente== false" type="button" class="btn btn-info" (click)="personaRegistrar(persona.id)"><i class="bi bi-key"></i></button>
+              <div *ngIf="esCliente == false">
+                <button  [disabled]="!persona.entrenando" type="button" class="btn btn-warning" (click)="elegir(persona)"><i class="bi bi-eye"></i></button>&nbsp;
+                <button  [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaEditar(persona.id)"><i class="bi bi-pencil"></i></button>&nbsp;
+                <button  type="button" class="btn btn-primary" (click)="personaReporte(persona.id)"><i class="bi bi-clipboard-heart"></i></button>&nbsp;
+                <button  [disabled]="!persona.entrenando" type="button" class="btn btn-primary" (click)="personaTerminar(persona.id)"><i class="bi bi-door-closed"></i></button>&nbsp;
+                <button  [disabled]="persona.entrenamientos.length" type="button" class="btn btn-danger disabled-button" (click)="personaEliminar(persona.id)" ><i class="bi bi-trash"></i></button>&nbsp;
+                <button  type="button" class="btn btn-info" (click)="personaRegistrar(persona.id)"><i class="bi bi-key"></i></button>
+              </div>
             </td>
           </tr>
         </tbody>

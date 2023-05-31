@@ -9,7 +9,8 @@ from vistas import \
   VistaPersona, VistaPersonas, \
   VistaEjercicio, VistaEjercicios, \
   VistaEntrenamiento, VistaEntrenamientos, VistaRutina, \
-  VistaReporte, VistaEntrenadores, VistaRutinas, VistaEjercicioRutina, VistaCliente, VistaUsuarioPersona
+  VistaReporte, VistaEntrenadores, VistaRutinas, VistaEjercicioRutina, VistaCliente, VistaUsuarioPersona, \
+  VistaSignInAdministrator, VistaEntrenador
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:admin@localhost:5432/enForma'
@@ -27,6 +28,7 @@ cors = CORS(app)
 
 api = Api(app)
 api.add_resource(VistaSignInTraining, '/signinTraining')
+api.add_resource(VistaSignInAdministrator, '/signinAdministrator')
 api.add_resource(VistaLogIn, '/login')
 api.add_resource(VistaPersonas, '/personas/<int:id_usuario>')
 api.add_resource(VistaPersona, '/persona/<int:id_persona>')
@@ -36,6 +38,7 @@ api.add_resource(VistaEntrenamientos, '/entrenamientos/<int:id_persona>')
 api.add_resource(VistaEntrenamiento, '/entrenamiento/<int:id_entrenamiento>')
 api.add_resource(VistaReporte, '/persona/<int:id_persona>/reporte')
 api.add_resource(VistaEntrenadores, '/entrenadores')
+api.add_resource(VistaEntrenador, '/entrenador/<int:id_entrenador>')
 api.add_resource(VistaRutina, '/rutina/<int:id_usuario>')
 api.add_resource(VistaRutinas, '/rutinas/<int:id_usuario>')
 api.add_resource(VistaCliente, '/signin/persona/<int:id_persona>')
